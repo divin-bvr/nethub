@@ -4,12 +4,9 @@ Hands-on cybersecurity and networking training. Uganda, DRC, and Sunday labs.
 
 ## GitHub Pages (public website)
 
-The pages themselves are static HTML. After you push this repo to GitHub:
+The pages themselves are static HTML. Public site: https://divin-bvr.github.io/nethub/
 
-1. Repo **Settings → Pages**
-2. Source: **Deploy from a branch**
-3. Branch: **main**, folder: **/ (root)**
-4. Site URL: `https://YOUR-USERNAME.github.io/nethub/`
+A GitHub Action deploys Pages on every push to `main`. If the first deploy asks for permission, open the failed Actions run and enable GitHub Pages.
 
 Browsing, catalog, About, legal, and pricing will load on that address.
 
