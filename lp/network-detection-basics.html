@@ -1,0 +1,2420 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="download_date" content="2026-09-29T15:16:19.331Z"/><link href="https://cdn.prod.website-files.com/" rel="preconnect" crossorigin="anonymous"><title>Network Detection Basics | Nethub Hands-on Training</title><meta content="Explore Nethub's courses similar to Network Detection Basics and discover the learning path that best matches your goals and experience." name="description"><meta content="Network Detection Basics | Nethub Hands-on Training" property="og:title"><meta content="Explore Nethub's courses similar to Network Detection Basics and discover the learning path that best matches your goals and experience." property="og:description"><meta content="Network Detection Basics | Nethub Hands-on Training" name="twitter:title"><meta content="Explore Nethub's courses similar to Network Detection Basics and discover the learning path that best matches your goals and experience." name="twitter:description"><meta property="og:type" content="website"><meta content="summary_large_image" name="twitter:card"><meta content="width=device-width, initial-scale=1" name="viewport"><meta content="cXgqUQTGQGhLFs5u1k2X7Ths8yysn5lyMBsBxeip6sI" name="google-site-verification"><link href="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/css/cybrary-staging.webflow.shared.e4d16302d.min.css" rel="stylesheet" type="text/css"><style>html.w-mod-js:not(.w-mod-ix3) :is([data-wf-component-id="2bf9070c-0631-1573-cfd3-071763726ea6"]:is(.logo-marquee_list), [data-wf-component-id="2bf9070c-0631-1573-cfd3-071763726ea6"] :is(.logo-marquee_list)) {visibility: hidden !important;}</style><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="../assets/nethub/logo-mark.png" rel="shortcut icon" type="image/x-icon"><link href="https://cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6465520c56aba7d9edf36d09_apple_touch_icon_256x256.png" rel="apple-touch-icon"><!-- Google Tag Manager -->
+<script>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != "dataLayer" ? "&l=" + l : "";
+    j.async = true;
+    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", "GTM-KVNRWXV");
+</script>
+<!-- End Google Tag Manager -->
+
+<script defer="" src="../_external/cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<!-- [Attributes by Finsweet] Social Share -->
+<script defer="" src="../_external/cdn.jsdelivr.net/npm/@finsweet/attributes-socialshare@1/socialshare.js"></script>
+
+<!-- [Attributes by Finsweet] Custom Form Select -->
+<script defer="" src="../_external/cdn.jsdelivr.net/npm/@finsweet/attributes-selectcustom@1/selectcustom.js"></script>
+
+<!-- Please keep this css code to improve the font quality-->
+<style>
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .card-component_link-wrapper {
+    pointer-events: auto !important;
+  }
+</style>
+
+<!-- Custom style for hiding elements -->
+<style>
+  [data-hidden="true"] {
+    display: none;
+  }
+</style>
+<script>
+  const showElementsBasedOnLoginStatus = () => {
+    const fetchIsUserLoggedIn = () => {
+      var cookies = decodeURIComponent(document.cookie).split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var c = cookies[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf("user-meta=") == 0) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    const loggedInElements = document.querySelectorAll('[cb-element="logged-in"]');
+    const loggedInStartForFree = document.querySelectorAll('[cb-elements="logged-in-start"]');
+    const loggedOutElements = document.querySelectorAll('[cb-element="logged-out"]');
+    const navProfile = document.querySelector('[cb-element="nav-profile"]');
+
+    const isUserLoggedIn = fetchIsUserLoggedIn();
+    if (loggedInElements && loggedOutElements && navProfile) {
+      if (isUserLoggedIn) {
+        loggedInElements.forEach((element) => {
+          element.style.display = "flex";
+        });
+        loggedOutElements.forEach((element) => {
+          element.style.display = "none";
+        });
+        loggedInStartForFree.forEach((element) => {
+          element.setAttribute('href', 'http://app.cybrary.it');
+        });
+        navProfile.style.display = "flex";
+      } else if (!isUserLoggedIn) {
+        if (window.innerWidth > 766) {
+          navProfile.style.display = "none";
+        } else {
+          navProfile.style.display = "flex";
+        }
+        loggedInStartForFree.forEach((element) => {
+          element.setAttribute('href', '#');
+        });
+        loggedInElements.forEach((element) => {
+          element.style.display = "none";
+        });
+        loggedOutElements.forEach((element) => {
+          element.style.display = "flex";
+        });
+      }
+    }
+  };
+
+  const showElementsInterval = setInterval(() => {
+    showElementsBasedOnLoginStatus();
+  }, 200);
+
+  var Webflow = Webflow || [];
+  Webflow.push(function () {
+    // Webflow is done loading
+
+    clearInterval(showElementsInterval);
+    showElementsBasedOnLoginStatus();
+  });
+</script>
+
+
+<script>
+  window.markerConfig = {
+    project: '6446b960812a2d473d7fa6a4', 
+    source: 'snippet'
+  };
+</script>
+
+<script>
+//**!function(e,r,a){if(!e.__Marker){e.__Marker={};var t=[],n={__cs:t};["show","hide","isVisible","capture","cancelCapture","unload","reload","isExtensionInstalled","setReporter","setCustomData","on","off"].forEach(function(e){n[e]=function(){var r=Array.prototype.slice.call(arguments);r.unshift(e),t.push(r)}}),e.Marker=n;var s=r.createElement("script");s.async=1,s.src="https://edge.marker.io/latest/shim.js";var i=r.getElementsByTagName("script")[0];i.parentNode.insertBefore(s,i)}}(window,document);**//
+</script>
+
+
+<script>
+  const runOnThesePages = ["/business", "/government", "/mitre-attack", 
+                           "/threat-actor-campaign", "/business-resources", 
+                           "/baseline", "/course/cissp", "/course/crisc", 
+                           "/career-path/ciso", "/career-path/12-competencies-of-the-effective-ciso", 
+                           "/career-path/50-ciso-security-controls"];
+  const currentPage = window.location.pathname;
+
+  if (runOnThesePages.includes(currentPage)) {
+    console.log("pathname: " + window.location.pathname);
+
+    !function () {var reb2b = window.reb2b = window.reb2b || [];if (reb2b.invoked) return;reb2b.invoked = true;reb2b.methods = ["identify", "collect"];reb2b.factory = function (method) {return function () {var args = Array.prototype.slice.call(arguments);args.unshift(method);reb2b.push(args);return reb2b;};};for (var i = 0; i < reb2b.methods.length; i++) {var key = reb2b.methods[i];reb2b[key] = reb2b.factory(key);}reb2b.load = function (key) {var script = document.createElement("script");script.type = "text/javascript";script.async = true;script.src = "https://s3-us-west-2.amazonaws.com/b2bjsstore/b/" + key + "/reb2b.js.gz";var first = document.getElementsByTagName("script")[0];first.parentNode.insertBefore(script, first);};reb2b.SNIPPET_VERSION = "1.0.1";reb2b.load("RGNLKQHVL46Q");}();
+
+  }else{
+    console.log("no");
+  }
+</script><link rel="stylesheet" href="../assets/nethub/nethub.css"></head><body><div class="page-wrapper"><div class="global-styles w-embed w-script"><script src="../_external/cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script type="text/javascript">
+  Paddle.Setup({ 
+    token: 'live_672fbf566d8d4b530cdeaadf09f',
+    pwAuth: 'cb81a9fdeb97e2cb5c7e79cd4e8a9d57'
+  });
+</script>
+
+<style>
+.text-style-2lines,.text-style-3lines,.text-style-4lines,.text-style-6lines{display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}.padding-0,.spacing-clean{padding:0!important}.margin-bottom,.margin-horizontal,.margin-left,.margin-right,.w-richtext>:not(div):first-child,.w-richtext>div:first-child>:first-child{margin-top:0!important}.margin-horizontal,.margin-left,.margin-right,.margin-top,.w-richtext ol li:last-child,.w-richtext ul li:last-child,.w-richtext>:last-child{margin-bottom:0!important}.padding-bottom,.padding-horizontal,.padding-left,.padding-right{padding-top:0!important}.padding-horizontal,.padding-left,.padding-right,.padding-top{padding-bottom:0!important}.padding-bottom,.padding-left,.padding-top,.padding-vertical{padding-right:0!important}.padding-bottom,.padding-right,.padding-top,.padding-vertical{padding-left:0!important}.text-color-alternate-gradient,.text-color-orange-gradient,.text-color-pink-gradient,.text-color-purple-gradient,.text-style-highlight{-webkit-text-fill-color:transparent;text-fill-color:transparent}body{-webkit-font-smoothing:antialiased;-moz-font-smoothing:antialiased;-o-font-smoothing:antialiased}select{appearance:none;background-color:transparent;border:none;padding:0 1em 0 0;margin:0;width:100%;font-family:inherit;font-size:inherit;cursor:inherit;line-height:inherit},.w-input,.w-nav-link,.w-select,.w-tab-link,a{color:inherit;text-decoration:inherit;font-size:inherit}.card-component_link-wrapper,.gradient-wrapper,.pointer-events-off{pointer-events:none}.pointer-events-on{pointer-events:auto}.div-square::after{content:'';display:block;padding-bottom:100%}main:focus-visible{outline:-webkit-focus-ring-color auto 0}.container-large,.container-medium,.container-small{margin-right:auto!important;margin-left:auto!important}.margin-bottom,.margin-left,.margin-top,.margin-vertical{margin-right:0!important}.margin-0,.spacing-clean{margin:0!important}.margin-bottom,.margin-right,.margin-top,.margin-vertical{margin-left:0!important}.w-input,.w-select,a{color:inherit;text-decoration:inherit;font-size:inherit}.text-style-6lines{-webkit-line-clamp:6}.text-style-4lines{-webkit-line-clamp:4}.text-style-3lines{-webkit-line-clamp:3}.text-style-2lines,[cl-function=truncate-two]{-webkit-line-clamp:2}.truncate-width{width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.no-scrollbar{-ms-overflow-style:none;overflow:-moz-scrollbars-none}.no-scrollbar::-webkit-scrollbar{display:none}.display-inlineflex{display:inline-flex}.hide{display:none!important}@media screen and (max-width:991px){.hide,.hide-tablet{display:none!important}}@media screen and (max-width:767px){.hide-mobile-landscape{display:none!important}}@media screen and (max-width:479px){.hide-mobile{display:none!important}}[cl-function=truncate-three],[cl-function=truncate-two]{display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}.active-button,.button,.button-gradient-wrapper,.card-component_pagination-dot.is-active,.is-alternate-gradient{background:url(https://cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645f34ba168c7d2a9aff6b71_Colour.webp) top left/130% auto}.text-color-alternate-gradient{background:url(https://cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645f34ba168c7d2a9aff6b71_Colour.webp) 0 0/125% 100% padding-box text;-webkit-background-clip:text}.text-style-highlight{background:linear-gradient(94.16deg,#d90e72 3.35%,#ed616e 100%);-webkit-background-clip:text;background-clip:text}.is-alternate,.is-link,.is-pricing,.is-secondary{background-color:transparent!important;background:0 0}.is-alternate:hover,.is-link:hover,.is-secondary:hover{box-shadow:none}.background-color-black-gradient,.section_blog-header{background:linear-gradient(180deg,#13171c 0,rgba(19,23,28,0) 100%)}.case-studies_item .button-gradient-wrapper{opacity:0}.button.is-alternate:hover .is-alternate-gradient.button-bg,.case-studies_item:hover .button-gradient-wrapper{opacity:1}.footer_link-list .embed-wrapper{transition:transform .5s ease-in}.faqs_accordion.is-active .faqs_icon,.footer_link-list.open .embed-wrapper{transform:rotate(180deg)}.card-component_pagination{transform:none!important}@media (min-width:768px){.upskill_component .card-component_navigation-wrapper{display:none}}@media (min-width:991px){.card-component_item .button{height:0;max-height:0;padding:0;opacity:0;margin-top:2rem;transition:height .5s ease-in-out,max-height .5s ease-in-out,padding .5s ease-in-out,opacity .5s ease-in-out}.card-component_item:hover .button{height:auto;max-height:5rem;padding:1rem 1.5rem;opacity:1}.card-component_item .card-component_play-button-wrapper{opacity:0}.card-component_item:hover,.card-component_item:hover .card-component_play-button-wrapper{opacity:1}.card-component_list>.card-component_item-no-hover:nth-child(n+5),.card-component_list>.card-component_item:nth-child(n+5){display:none}.card-component_list>.card-component_item.no-crop:nth-child(n+5){display:block}}.faqs_accordion.is-active .active-button,.policy-content_link.w--current .active-button{margin-left:0;opacity:1}[cl-function=truncate-three]{-webkit-line-clamp:3}[cl-style='1x1']{aspect-ratio:1/1}.faqs_accordion.is-active .faqs_answer{max-height:20rem!important}.is-orange{background:linear-gradient(90deg,#f4964c .89%,#e77f7b 99.11%)}.is-pink{background:linear-gradient(90deg,#e31b73 .89%,#e84175 99.11%)}.is-purple{background:linear-gradient(90deg,#b95d9c .89%,#d499f0 99.11%)}.text-color-orange-gradient{background:linear-gradient(90deg,#f4964c .89%,#e77f7b 99.11%);-webkit-background-clip:text;background-clip:text}.text-color-pink-gradient{background:linear-gradient(90deg,#e31b73 .89%,#e84175 99.11%);-webkit-background-clip:text;background-clip:text}.text-color-purple-gradient{background:linear-gradient(90deg,#b95d9c .89%,#d499f0 99.11%);-webkit-background-clip:text;background-clip:text}@media (max-width:767px){.case-studies_item-link .button{display:none}._3-col-info_item .heading-style-h4{font-size:1.5rem}}.card-component_navigation-wrapper .card-component_pagination-dot:nth-child(n+6){display:none}.cloud-modernization_card-content:hover .icon-embed-xxsmall{color:#d80c71}.background-color-black-gradient-reversed{background:linear-gradient(0deg,#13171c 0,rgba(19,23,28,0) 100%)}@media (max-width:991px){.card-component_item-content .button{margin-top:2rem}}.policy-content_link:hover .simple-embed-wrapper{opacity:1;transform:translate(0,0)}.button.is-icon:hover svg{transform:translate(.25rem,0)}.button.is-icon svg{transition:transform,.2s}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.form-input {
+	font-size: 0.875rem !important;
+}
+select {
+	font-size: 0.875rem !important;
+  color: #bfc2d1 !important;
+  appearance: none !important;
+}
+.form-dropdown-item.w--current {
+	color: inherit !important;
+}
+
+p{color: var(--grey-2);
+    width: 100%;
+    font-weight: 500;
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;}
+
+@media screen and (max-width: 991px) {
+[nav-style="outline"] .nav_dropdown-item:not(:last-child) {
+	border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+}
+.is-invalid {
+	color: #dc384c;
+}
+.is-invalid::placeholder {
+	color: #dc384c;
+}
+.form-dropdown.is-invalid, .form-input.is-invalid {
+	border: 1px solid #dc384c;
+}
+.form-dropdown-text.is-invalid {
+	color: #dc384c;
+}
+
+
+@media only screen and (max-width: 1118px) {
+.nav_links-wrapper {
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    display: flex;
+}
+
+.nav_menu {grid-column-gap: 16px; display: flex;}
+}
+
+@media only screen and (max-width: 1250px) {
+.main-wrapper {
+    width: 105%;
+}
+}
+@media only screen and (max-width: 750px) {
+.main-wrapper {width: 100%;}
+}
+
+.course-description h2 
+ {
+    letter-spacing: -.02em;
+    text-transform: capitalize;
+    margin-left: 0;
+    font-family: Figtree, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1;
+    display: block;
+    margin-bottom: 5px;
+}
+#iub-legalDoc .container>footer {box-shadow: none !important;}
+</style></div><div class="w-embed"><style>
+
+@media (min-width: 991px) {
+[cb-max='true'] {
+	max-width: 57rem !important;
+}
+
+[cb-max='true'] .max-width-small {
+	max-width: 48rem !important;
+}
+
+}
+[cb-white='true'] {
+	color: white !important;
+}
+
+</style></div><main class="main"><div class="nav-div"><div class="fixed_wrapper"><div cl-close-target="Menu" data-animation="default" data-collapse="small" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="nav_component with_banner w-nav"><nav class="nav_container"><a href="../index.html" class="nav_logo-wrapper w-nav-brand"><img loading="lazy" src="../assets/nethub/logo-nav.png" alt="Nethub" alt="" class="nav_logo"></a><div class="nav-right_wrapper"><div data-delay="200" data-hover="true" cb-element="nav-profile" class="nav_profile w-dropdown"><div class="nav_profile_toggle w-dropdown-toggle"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/646bc9b6485b17ee470cf17a_UserCircle.svg" alt="" class="nav_profile_icon"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/646bebc1c1b1c9b65da2b2fe_User_icon_mobile-1pmvoxp.svg" alt="" class="nav_profile_icon-mobile"></div><nav class="nav_profile_list w-dropdown-list"><div cb-element="logged-in" class="nav_profile_wrap"><a href="https://app.cybrary.it/" class="nav_profile_link has-border w-inline-block"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/646bcb70b736b95083973672_House.svg" alt="" class="nav_profile_link-icon"><div class="text-size-small">Dashboard</div></a><a href="https://app.cybrary.it/profile" class="nav_profile_link w-inline-block"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/646bc9b6485b17ee470cf17a_UserCircle.svg" alt="" class="nav_profile_link-icon"><div class="text-size-small">Profile</div></a><a href="https://app.cybrary.it/settings/membership" class="nav_profile_link w-inline-block"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/646bcc05f5933b13cf51b80f_ArrowsClockwise.svg" alt="" class="nav_profile_link-icon"><div class="text-size-small">Membership Settings</div></a><a href="https://app.cybrary.it/settings/account" class="nav_profile_link w-inline-block"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/646bcc1b45e22488bb0ac5b7_UserGear.svg" alt="" class="nav_profile_link-icon"><div class="text-size-small">Account Settings</div></a><a href="https://help.cybrary.it/hc/en-us" class="nav_profile_link has-border w-inline-block"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d73253081f95e7114665d_Question.svg" alt="" class="nav_profile_link-icon"><div class="text-size-small">Support</div></a><a href="https://app.cybrary.it/logout" class="nav_profile_link w-inline-block"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/646bcc474735f531feac6d0c_SignOut.svg" alt="" class="nav_profile_link-icon"><div class="text-size-small">Logout</div></a></div><div cb-element="logged-out" class="nav_profile_wrap not-loggedin"><div class="text-align-center">Start learning with free on-demand video training</div><a cb-element="trigger-register-modal" href="." class="button-18 w-button">Sign up</a><a href="../index.html#join" class="nav_link-9 w-button">Login</a></div></nav></div></div></nav><div class="custom-styles-nav hide w-embed w-script"><style>
+.nav_list-link::after {
+    content: url('https://cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/64606d5728ba5a65bd1587c5_right-chevron-silver.svg');
+    display: inline-block;
+    height: 100%;
+    width: 0rem;
+    padding-right: 0.5rem;
+    justify-self: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 0.5rem;
+    bottom: 2px;
+    position: relative;
+}
+.nav_logo-wrapper {
+    display: inline-block !important;
+}
+
+@media screen and (min-width: 992px) {
+.nav_logo-wrapper {
+    display: inline-block !important;
+}
+
+	.nav_list-link::after {
+    content: url('https://cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/644a423a3fa9a8330ccbe751_Vectors-Wrapper.svg');
+  }
+	.nav_list-item:hover .nav_list-link::after {
+  	display: inline-block;
+  }  
+}
+
+
+@media screen and (max-width:768px) {
+[nav-style="outline"] .nav_dropdown-item:not(:last-child),[nav-style="outline"] .nav_link:not(:last-child) {
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+[nav-style="nested"] .nav_dropdown-item:not(:last-child),[nav-style="nested"] .nav_link:not(:last-child) {
+	border-bottom: none;
+}
+}
+
+@media screen and (min-width: 992px) {
+.nav_dropdown-item:hover {
+background: rgba(255, 255, 255, 0.1);
+}
+.nav_dropdown:hover {
+background: rgba(255, 255, 255, 0.1);
+}
+.nav_dropdown-link:hover {
+background: rgba(255, 255, 255, 0.1);
+}
+.nav_dropdown-item_level3:hover {
+background: rgba(255, 255, 255, 0.1);
+}
+}
+</style>
+<script>
+"use strict";
+(() => {
+  // bin/live-reload.js
+
+  // src/index.ts
+  window.Webflow ||= [];
+  window.Webflow.push(async () => {
+    const pageSource = "/navsetup";
+    const pageData = await fetch(pageSource);
+    const pageText = await pageData.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(pageText, "text/html");
+    function categorizeElements() {
+      const elements = [...doc.querySelectorAll(".nav_list-item")];
+      elements.forEach(function(element) {
+        const targetCategory = element.getAttribute("cl-category-target");
+        const destinationContainer = document.querySelector(
+          '[cl-category-destination="' + targetCategory + '"]'
+        );
+        if (destinationContainer) {
+          destinationContainer.appendChild(element);
+        }
+      });
+    }
+    categorizeElements();
+  });
+})();
+//# sourceMappingURL=index.js.map
+
+</script></div></div></div></div><div class="section-hero margin-top-medium"><div class="padding-global"><div class="container-large"><div class="padding-section-small"><div class="w-layout-grid section-hero__content-wrapper"><div cb-max="" id="w-node-bc2d5682-3e29-e66e-9a6e-05b025f90cd1-76ec486f" class="section-hero__content"><h1 class="section-hero__title">Let’s Find the <span class="text-color-alternate-gradient">Right Learning Path.</span></h1><p class="section-hero__description">Thanks for checking in with us! We noticed you haven't been making progress on your course, and that's okay. Check out our suggestions below to see if another course piques your interest.</p><div class="button-group align-center-tablet"><a href="demo-request.html" class="button w-button">Nethub for Business Demo</a><a href="../register.html" target="_blank" class="button is-alternate is-no-outline w-inline-block"><div>Keep Learning</div><div class="icon-embed_3x6 w-embed"><svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1L3.50585 3.50585C3.77876 3.77876 3.77876 4.22124 3.50585 4.49415L1 7" stroke="currentColor"></path>
+</svg></div></a></div></div><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6793f5238f4690f030c6238d_Catalog_Hero.avif" loading="lazy" width="1442" sizes="(max-width: 479px) 100vw, 49vw" alt="" class="full-image"></div></div></div></div></div><div class="section-course-recom background-color-black-gradient"><div class="padding-global"><div class="container-large"><div class="padding-section-medium"><div class="section-course-recom__content-wrapper"><h2 class="section-course-recom__title">Your course feels too challenging.</h2><p class="section-course-recom__desc">No worries! Here are some other related courses that might be a better fit:</p><div class="section-course-recom__courses"><div class="section-course-recom__course"><div class="card-component_item"><div class="card-component_item-link"><div class="card-component_image-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6a6bf0787888252e9a8f57c7_EntryLevel_Cybersecurity_Training.webp" loading="lazy" width="250" height="175" alt="" sizes="(max-width: 479px) 82vw, (max-width: 767px) 83vw, (max-width: 991px) 80vw, 22vw" class="card-component_image"></div><div class="card-component_item-content"><div class="card-component_item-content-top"><div class="card-component_meta-wrapper"><div class="card-component_category"><div class="text-size-tiny text-weight-semibold">Course</div></div></div><div class="card-component_title-wrapper"><h3 class="heading-style-h5">Entry-Level Cybersecurity Training</h3></div><div cl-function="truncate-three" class="text-size-small w-richtext"><p>This entry-level course will give you the foundational knowledge you need to get started in the field.</p></div><div class="button is-card"><div>Enroll Today</div></div></div></div></div><a aria-label="Link to course" href="https://app.cybrary.it/browse/course/entry-level-cybersecurity-training" target="_blank" class="card-component_lis w-inline-block"></a></div></div><div class="section-course-recom__course"><div class="card-component_item"><div class="card-component_item-link"><div class="card-component_image-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6a6c0eb67ac035cdb7b1471d_Open_System_Intelligence_Gathering.webp" loading="lazy" width="250" height="175" alt="" sizes="(max-width: 479px) 82vw, (max-width: 767px) 83vw, (max-width: 991px) 80vw, 22vw" class="card-component_image"></div><div class="card-component_item-content"><div class="card-component_item-content-top"><div class="card-component_meta-wrapper"><div class="card-component_category"><div class="text-size-tiny text-weight-semibold">Learn On Demand</div></div></div><div class="card-component_title-wrapper"><h3 class="heading-style-h5">Use Wireshark to Discover Evidence of Network Attacks</h3></div><div cl-function="truncate-three" class="text-size-small w-richtext"><p>In this hands-on lab, you’ll locate information from network traffic to uncover evidence of attacks.</p></div><div class="button is-card"><div>Enroll Today</div></div></div></div></div><a aria-label="Link to course" href="https://app.cybrary.it/browse/skillable/use-wireshark-to-discover-evidence-of-network-attacks" target="_blank" class="card-component_lis w-inline-block"></a></div></div><div class="section-course-recom__course"><div class="card-component_item"><div class="card-component_item-link"><div class="card-component_image-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6a6c0eb67ac035cdb7b1471d_Open_System_Intelligence_Gathering.webp" loading="lazy" width="250" height="175" alt="" sizes="(max-width: 479px) 82vw, (max-width: 767px) 83vw, (max-width: 991px) 80vw, 22vw" class="card-component_image"></div><div class="card-component_item-content"><div class="card-component_item-content-top"><div class="card-component_meta-wrapper"><div class="card-component_category"><div class="text-size-tiny text-weight-semibold">Learn On Demand</div></div></div><div class="card-component_title-wrapper"><h3 class="heading-style-h5">Identify Non-Secure Network Traffic</h3></div><div cl-function="truncate-three" class="text-size-small w-richtext"><p>Get hands-on experience using Wireshark to sniff network traffic and detect non-secure protocols.</p></div><div class="button is-card"><div>Enroll Today</div></div></div></div></div><a aria-label="Link to course" href="https://app.cybrary.it/browse/skillable/identify-non-secure-network-traffic" target="_blank" class="card-component_lis w-inline-block"></a></div></div></div></div></div></div></div></div><div class="section-course-recom background-color-black-gradient"><div class="padding-global"><div class="container-large"><div class="padding-section-medium"><div class="section-course-recom__content-wrapper"><h2 class="section-course-recom__title">Your course feels too easy.</h2><p class="section-course-recom__desc">We’ve got you covered! Check out these more advanced options:</p><div class="section-course-recom__courses"><div class="section-course-recom__course"><div class="card-component_item"><div class="card-component_item-link"><div class="card-component_image-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6a6c15e1e7585ba74aa5ea5d_Spearphishing_with_an_Attachment.webp" loading="lazy" width="250" height="175" alt="" sizes="(max-width: 479px) 82vw, (max-width: 767px) 83vw, (max-width: 991px) 80vw, 22vw" class="card-component_image"></div><div class="card-component_item-content"><div class="card-component_item-content-top"><div class="card-component_meta-wrapper"><div class="card-component_category"><div class="text-size-tiny text-weight-semibold">Virtual Lab</div></div></div><div class="card-component_title-wrapper"><h3 class="heading-style-h5">Spearphishing with an Attachment</h3></div><div cl-function="truncate-three" class="text-size-small w-richtext"><p>Learn the basics of email analysis with a special focus on malicious attachments.</p></div><div class="button is-card"><div>Enroll Today</div></div></div></div></div><a aria-label="Link to course" href="https://app.cybrary.it/browse/virtual-lab/spearphishing-with-an-attachment" target="_blank" class="card-component_lis w-inline-block"></a></div></div><div class="section-course-recom__course"><div class="card-component_item"><div class="card-component_item-link"><div class="card-component_image-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6a6c15e1e7585ba74aa5ea5d_Spearphishing_with_an_Attachment.webp" loading="lazy" width="250" height="175" alt="" sizes="(max-width: 479px) 82vw, (max-width: 767px) 83vw, (max-width: 991px) 80vw, 22vw" class="card-component_image"></div><div class="card-component_item-content"><div class="card-component_item-content-top"><div class="card-component_meta-wrapper"><div class="card-component_category"><div class="text-size-tiny text-weight-semibold">Virtual Lab</div></div></div><div class="card-component_title-wrapper"><h3 class="heading-style-h5">Spearphishing with a Link</h3></div><div cl-function="truncate-three" class="text-size-small w-richtext"><p>In this hands-on lab, you will learn how to analyze spearphishing emails containing malicious links.</p></div><div class="button is-card"><div>Enroll Today</div></div></div></div></div><a aria-label="Link to course" href="https://app.cybrary.it/browse/virtual-lab/spearphishing-with-a-link" target="_blank" class="card-component_lis w-inline-block"></a></div></div><div class="section-course-recom__course"><div class="card-component_item"><div class="card-component_item-link"><div class="card-component_image-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6a6c15e1e7585ba74aa5ea5d_Spearphishing_with_an_Attachment.webp" loading="lazy" width="250" height="175" alt="" sizes="(max-width: 479px) 82vw, (max-width: 767px) 83vw, (max-width: 991px) 80vw, 22vw" class="card-component_image"></div><div class="card-component_item-content"><div class="card-component_item-content-top"><div class="card-component_meta-wrapper"><div class="card-component_category"><div class="text-size-tiny text-weight-semibold">Virtual Lab</div></div></div><div class="card-component_title-wrapper"><h3 class="heading-style-h5">Web Activity Logs</h3></div><div cl-function="truncate-three" class="text-size-small w-richtext"><p>Practice identifying meaningful events in web proxy and name server logs.</p></div><div class="button is-card"><div>Enroll Today</div></div></div></div></div><a aria-label="Link to course" href="https://app.cybrary.it/browse/virtual-lab/intro-to-web-activity-log-analysis" target="_blank" class="card-component_lis w-inline-block"></a></div></div></div></div></div></div></div></div><div class="section-course-recom background-color-black-gradient"><div class="padding-global"><div class="container-large"><div class="padding-section-medium"><div class="section-course-recom__content-wrapper"><h2 class="section-course-recom__title">Your course just isn’t the right fit.</h2><p class="section-course-recom__desc">It happens! Try one of these learner favorites instead:</p><div class="section-course-recom__courses"><div class="section-course-recom__course"><div class="card-component_item"><div class="card-component_item-link"><div class="card-component_image-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6a6c0098e7ffc40679319e32_AI_System_Basics.webp" loading="lazy" width="250" height="175" alt="" sizes="(max-width: 479px) 82vw, (max-width: 767px) 83vw, (max-width: 991px) 80vw, 22vw" class="card-component_image"></div><div class="card-component_item-content"><div class="card-component_item-content-top"><div class="card-component_meta-wrapper"><div class="card-component_category"><div class="text-size-tiny text-weight-semibold">Course</div></div></div><div class="card-component_title-wrapper"><h3 class="heading-style-h5">AI System Basics</h3></div><div cl-function="truncate-three" class="text-size-small w-richtext"><p>Do you understand what an AI System actually is? This course defines and explains it clearly.</p></div><div class="button is-card"><div>Enroll Today</div></div></div></div></div><a aria-label="Link to course" href="https://app.cybrary.it/browse/course/ai-system-basics" target="_blank" class="card-component_lis w-inline-block"></a></div></div><div class="section-course-recom__course"><div class="card-component_item"><div class="card-component_item-link"><div class="card-component_image-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6a6c0329e72e3e4a09a33c9a_CompTIA_Security.webp" loading="lazy" width="250" height="175" alt="" sizes="(max-width: 479px) 82vw, (max-width: 767px) 83vw, (max-width: 991px) 80vw, 22vw" class="card-component_image"></div><div class="card-component_item-content"><div class="card-component_item-content-top"><div class="card-component_meta-wrapper"><div class="card-component_category"><div class="text-size-tiny text-weight-semibold">Certification Prep</div></div></div><div class="card-component_title-wrapper"><h3 class="heading-style-h5">Security+</h3></div><div cl-function="truncate-three" class="text-size-small w-richtext"><p>Prepare for your CompTIA Security+ certification!</p></div><div class="button is-card"><div>Enroll Today</div></div></div></div></div><a aria-label="Link to course" href="https://app.cybrary.it/browse/paths/cert-prep-paths/security-plus" target="_blank" class="card-component_lis w-inline-block"></a></div></div><div class="section-course-recom__course"><div class="card-component_item"><div class="card-component_item-link"><div class="card-component_image-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6a6c03e02e62a4a69d90cbb9_CISSP.webp" loading="lazy" width="250" height="175" alt="" sizes="(max-width: 479px) 82vw, (max-width: 767px) 83vw, (max-width: 991px) 80vw, 22vw" class="card-component_image"></div><div class="card-component_item-content"><div class="card-component_item-content-top"><div class="card-component_meta-wrapper"><div class="card-component_category"><div class="text-size-tiny text-weight-semibold">Certification Prep</div></div></div><div class="card-component_title-wrapper"><h3 class="heading-style-h5">CISSP</h3></div><div cl-function="truncate-three" class="text-size-small w-richtext"><p>ISC2’s Certified Information Systems Security Practitioner (CISSP) certification is the gold standard of certifications for advanced professionals.</p></div><div class="button is-card"><div>Enroll Today</div></div></div></div></div><a aria-label="Link to course" href="https://app.cybrary.it/browse/paths/cert-prep-paths/certified-information-systems-security-professional" target="_blank" class="card-component_lis w-inline-block"></a></div></div></div></div></div></div></div></div><section class="section-partners"><div class="padding-global"><div class="container-large"><div class="padding-section-medium"><div class="section-partners__content-wrapper"><p class="section-partners__title">Trusted By Leading Organizations Worldwide</p><div data-wf-component-id="2bf9070c-0631-1573-cfd3-071763726ea6" data-wf-variant-state="base" class="b-logos__logos-wrapper"><div tr-marquee-element="panel" class="logo-marquee_list"><div id="w-node-_41c259fd-7060-dc78-4543-9f04fdf51033-fdf51032" class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645cda772120ceb9ca36d82f_Artboard_1_1-1ldm9k5.svg" loading="eager" width="156" height="41" alt="" class="logo-marquee_logo"></div><div id="w-node-_41c259fd-7060-dc78-4543-9f04fdf51035-fdf51032" class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645cda78698aea61a322e7f6_svg2.svg" loading="eager" width="204" height="37" alt="" class="logo-marquee_logo"></div><div id="w-node-_41c259fd-7060-dc78-4543-9f04fdf51037-fdf51032" class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645cda78acfcd1bb27412cbe_Layer_1.svg" loading="eager" width="199" height="16" alt="" class="logo-marquee_logo"></div><div id="w-node-_41c259fd-7060-dc78-4543-9f04fdf51039-fdf51032" class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645cda7983c3c9a8d063b703_Frame_96142-1qn4bnj.svg" loading="eager" width="159" height="49" alt="" class="logo-marquee_logo"></div><div id="w-node-_41c259fd-7060-dc78-4543-9f04fdf5103b-fdf51032" class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645cda7709912c75b0740f7e_Frame.svg" loading="eager" width="158" height="36" alt="" class="logo-marquee_logo"></div><div class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/64676e064bb53c2cdcc92d57_Google_logo_Black-1uq0305.svg" loading="eager" width="158" height="36" alt="" class="logo-marquee_logo"></div><div class="marquee-gsap-embed w-embed w-script"><!--<script async defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script async defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script> -->
+<!--<script async defer>
+
+// MARQUEE POWER-UP
+window.addEventListener("DOMContentLoaded", (event) => {
+  // attribute value checker
+  function attr(defaultVal, attrVal) {
+    const defaultValType = typeof defaultVal;
+    if (typeof attrVal !== "string" || attrVal.trim() === "") return defaultVal;
+    if (attrVal === "true" && defaultValType === "boolean") return true;
+    if (attrVal === "false" && defaultValType === "boolean") return false;
+    if (isNaN(attrVal) && defaultValType === "string") return attrVal;
+    if (!isNaN(attrVal) && defaultValType === "number") return +attrVal;
+    return defaultVal;
+  }
+  // marquee component
+  $("[tr-marquee-element='component']").each(function (index) {
+    let componentEl = $(this),
+      panelEl = componentEl.find("[tr-marquee-element='panel']"),
+      triggerHoverEl = componentEl.find("[tr-marquee-element='triggerhover']"),
+      triggerClickEl = componentEl.find("[tr-marquee-element='triggerclick']");
+    let speedSetting = attr(75, componentEl.attr("tr-marquee-speed")),
+      verticalSetting = attr(false, componentEl.attr("tr-marquee-vertical")),
+      reverseSetting = attr(false, componentEl.attr("tr-marquee-reverse")),
+      scrollDirectionSetting = attr(false, componentEl.attr("tr-marquee-scrolldirection")),
+      scrollScrubSetting = attr(false, componentEl.attr("tr-marquee-scrollscrub")),
+      moveDistanceSetting = -100,
+      timeScaleSetting = 1,
+      pausedStateSetting = false;
+    if (reverseSetting) moveDistanceSetting = 100;
+    let marqueeTimeline = gsap.timeline({ repeat: -1, onReverseComplete: () => marqueeTimeline.progress(1) });
+    if (verticalSetting) {
+      speedSetting = panelEl.first().height() / speedSetting;
+      marqueeTimeline.fromTo(panelEl, { yPercent: 0 }, { yPercent: moveDistanceSetting, ease: "none", duration: speedSetting });
+    } else {
+      speedSetting = panelEl.first().width() / speedSetting;
+      marqueeTimeline.fromTo(panelEl, { xPercent: 0 }, { xPercent: moveDistanceSetting, ease: "none", duration: speedSetting });
+    }
+    let scrubObject = { value: 1 };
+    ScrollTrigger.create({
+      trigger: "body",
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        if (!pausedStateSetting) {
+          if (scrollDirectionSetting && timeScaleSetting !== self.direction) {
+            timeScaleSetting = self.direction;
+            marqueeTimeline.timeScale(self.direction);
+          }
+          if (scrollScrubSetting) {
+            let v = self.getVelocity() * 0.006;
+            v = gsap.utils.clamp(-60, 60, v);
+            let scrubTimeline = gsap.timeline({ onUpdate: () => marqueeTimeline.timeScale(scrubObject.value) });
+            scrubTimeline.fromTo(scrubObject, { value: v }, { value: timeScaleSetting, duration: 0.5 });
+          }
+        }
+      }
+    });
+    function pauseMarquee(isPausing) {
+      pausedStateSetting = isPausing;
+      let pauseObject = { value: 1 };
+      let pauseTimeline = gsap.timeline({ onUpdate: () => marqueeTimeline.timeScale(pauseObject.value) });
+      if (isPausing) {
+        pauseTimeline.fromTo(pauseObject, { value: timeScaleSetting }, { value: 0, duration: 0.5 });
+        triggerClickEl.addClass("is-paused");
+      } else {
+        pauseTimeline.fromTo(pauseObject, { value: 0 }, { value: timeScaleSetting, duration: 0.5 });
+        triggerClickEl.removeClass("is-paused");
+      }
+    }
+    if (window.matchMedia("(pointer: fine)").matches) {
+      triggerHoverEl.on("mouseenter", () => pauseMarquee(true));
+      triggerHoverEl.on("mouseleave", () => pauseMarquee(false));
+    }
+    triggerClickEl.on("click", function () {
+      !$(this).hasClass("is-paused") ? pauseMarquee(true) : pauseMarquee(false);
+    });
+  });
+});
+
+</script>--></div></div><div tr-marquee-element="panel" class="logo-marquee_list"><div id="w-node-_41c259fd-7060-dc78-4543-9f04fdf51033-fdf51032" class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645cda772120ceb9ca36d82f_Artboard_1_1-1ldm9k5.svg" loading="eager" width="156" height="41" alt="" class="logo-marquee_logo"></div><div id="w-node-_41c259fd-7060-dc78-4543-9f04fdf51035-fdf51032" class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645cda78698aea61a322e7f6_svg2.svg" loading="eager" width="204" height="37" alt="" class="logo-marquee_logo"></div><div id="w-node-_41c259fd-7060-dc78-4543-9f04fdf51037-fdf51032" class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645cda78acfcd1bb27412cbe_Layer_1.svg" loading="eager" width="199" height="16" alt="" class="logo-marquee_logo"></div><div id="w-node-_41c259fd-7060-dc78-4543-9f04fdf51039-fdf51032" class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645cda7983c3c9a8d063b703_Frame_96142-1qn4bnj.svg" loading="eager" width="159" height="49" alt="" class="logo-marquee_logo"></div><div id="w-node-_41c259fd-7060-dc78-4543-9f04fdf5103b-fdf51032" class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645cda7709912c75b0740f7e_Frame.svg" loading="eager" width="158" height="36" alt="" class="logo-marquee_logo"></div><div class="logo-marquee_wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/64676e064bb53c2cdcc92d57_Google_logo_Black-1uq0305.svg" loading="eager" width="158" height="36" alt="" class="logo-marquee_logo"></div><div class="marquee-gsap-embed w-embed w-script"><!--<script async defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script async defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script> -->
+<!--<script async defer>
+
+// MARQUEE POWER-UP
+window.addEventListener("DOMContentLoaded", (event) => {
+  // attribute value checker
+  function attr(defaultVal, attrVal) {
+    const defaultValType = typeof defaultVal;
+    if (typeof attrVal !== "string" || attrVal.trim() === "") return defaultVal;
+    if (attrVal === "true" && defaultValType === "boolean") return true;
+    if (attrVal === "false" && defaultValType === "boolean") return false;
+    if (isNaN(attrVal) && defaultValType === "string") return attrVal;
+    if (!isNaN(attrVal) && defaultValType === "number") return +attrVal;
+    return defaultVal;
+  }
+  // marquee component
+  $("[tr-marquee-element='component']").each(function (index) {
+    let componentEl = $(this),
+      panelEl = componentEl.find("[tr-marquee-element='panel']"),
+      triggerHoverEl = componentEl.find("[tr-marquee-element='triggerhover']"),
+      triggerClickEl = componentEl.find("[tr-marquee-element='triggerclick']");
+    let speedSetting = attr(75, componentEl.attr("tr-marquee-speed")),
+      verticalSetting = attr(false, componentEl.attr("tr-marquee-vertical")),
+      reverseSetting = attr(false, componentEl.attr("tr-marquee-reverse")),
+      scrollDirectionSetting = attr(false, componentEl.attr("tr-marquee-scrolldirection")),
+      scrollScrubSetting = attr(false, componentEl.attr("tr-marquee-scrollscrub")),
+      moveDistanceSetting = -100,
+      timeScaleSetting = 1,
+      pausedStateSetting = false;
+    if (reverseSetting) moveDistanceSetting = 100;
+    let marqueeTimeline = gsap.timeline({ repeat: -1, onReverseComplete: () => marqueeTimeline.progress(1) });
+    if (verticalSetting) {
+      speedSetting = panelEl.first().height() / speedSetting;
+      marqueeTimeline.fromTo(panelEl, { yPercent: 0 }, { yPercent: moveDistanceSetting, ease: "none", duration: speedSetting });
+    } else {
+      speedSetting = panelEl.first().width() / speedSetting;
+      marqueeTimeline.fromTo(panelEl, { xPercent: 0 }, { xPercent: moveDistanceSetting, ease: "none", duration: speedSetting });
+    }
+    let scrubObject = { value: 1 };
+    ScrollTrigger.create({
+      trigger: "body",
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        if (!pausedStateSetting) {
+          if (scrollDirectionSetting && timeScaleSetting !== self.direction) {
+            timeScaleSetting = self.direction;
+            marqueeTimeline.timeScale(self.direction);
+          }
+          if (scrollScrubSetting) {
+            let v = self.getVelocity() * 0.006;
+            v = gsap.utils.clamp(-60, 60, v);
+            let scrubTimeline = gsap.timeline({ onUpdate: () => marqueeTimeline.timeScale(scrubObject.value) });
+            scrubTimeline.fromTo(scrubObject, { value: v }, { value: timeScaleSetting, duration: 0.5 });
+          }
+        }
+      }
+    });
+    function pauseMarquee(isPausing) {
+      pausedStateSetting = isPausing;
+      let pauseObject = { value: 1 };
+      let pauseTimeline = gsap.timeline({ onUpdate: () => marqueeTimeline.timeScale(pauseObject.value) });
+      if (isPausing) {
+        pauseTimeline.fromTo(pauseObject, { value: timeScaleSetting }, { value: 0, duration: 0.5 });
+        triggerClickEl.addClass("is-paused");
+      } else {
+        pauseTimeline.fromTo(pauseObject, { value: 0 }, { value: timeScaleSetting, duration: 0.5 });
+        triggerClickEl.removeClass("is-paused");
+      }
+    }
+    if (window.matchMedia("(pointer: fine)").matches) {
+      triggerHoverEl.on("mouseenter", () => pauseMarquee(true));
+      triggerHoverEl.on("mouseleave", () => pauseMarquee(false));
+    }
+    triggerClickEl.on("click", function () {
+      !$(this).hasClass("is-paused") ? pauseMarquee(true) : pauseMarquee(false);
+    });
+  });
+});
+
+</script>--></div></div><div class="logo-marquee_shadow-copy"></div></div></div></div></div></div></section><div class="section-lvl-up"><div class="padding-global"><div class="container-large"><div class="padding-section-medium"><div class="section-lvl-up__content-wrapper"><h2 class="section-lvl-up__title">Level Up Your Cybersecurity Skills with Nethub</h2><p class="section-lvl-up__desc">Our unique Learn, Practice, Prove methodology combines expert-led instruction, hands-on labs, and exam-aligned certification prep courses. Whether you’re an individual advancing your career or a manager equipping your team with critical expertise, Nethub helps turn knowledge into real-world capability and certification success.&nbsp;</p><div class="button-group align-center-tablet center"><a href="demo-request.html" class="button w-button">Nethub for Business Demo</a><a href="../register.html" target="_blank" class="button is-alternate is-no-outline w-inline-block"><div>Keep Learning</div><div class="icon-embed_3x6 w-embed"><svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1L3.50585 3.50585C3.77876 3.77876 3.77876 4.22124 3.50585 4.49415L1 7" stroke="currentColor"></path>
+</svg></div></a></div><div class="home-why-cybrary_content"><div class="w-layout-grid _3-features_component spacing-32"><div class="_3-features_item"><div class="featured__title margin-medium"><div class="_3-features_icon-wrapper"><div class="icon-embed-medium z-index-1 w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 49 49" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+<path d="M31.2914 20.0625L22.2914 14.0625C22.1218 13.9494 21.9248 13.8845 21.7212 13.8746C21.5176 13.8648 21.3152 13.9105 21.1356 14.0067C20.956 14.103 20.8059 14.2463 20.7013 14.4212C20.5968 14.5961 20.5417 14.7962 20.542 15V27C20.5417 27.2038 20.5968 27.4039 20.7013 27.5788C20.8059 27.7537 20.956 27.897 21.1356 27.9933C21.3152 28.0895 21.5176 28.1352 21.7212 28.1254C21.9248 28.1155 22.1218 28.0506 22.2914 27.9375L31.2914 21.9375C31.4461 21.8349 31.573 21.6956 31.6608 21.532C31.7486 21.3684 31.7945 21.1856 31.7945 21C31.7945 20.8144 31.7486 20.6316 31.6608 20.468C31.573 20.3044 31.4461 20.1651 31.2914 20.0625ZM22.792 24.8981V17.1019L28.6382 21L22.792 24.8981ZM41.167 7.875H8.16699C7.4708 7.875 6.80312 8.15156 6.31084 8.64384C5.81855 9.13613 5.54199 9.80381 5.54199 10.5V31.5C5.54199 32.1962 5.81855 32.8639 6.31084 33.3562C6.80312 33.8484 7.4708 34.125 8.16699 34.125H41.167C41.8632 34.125 42.5309 33.8484 43.0231 33.3562C43.5154 32.8639 43.792 32.1962 43.792 31.5V10.5C43.792 9.80381 43.5154 9.13613 43.0231 8.64384C42.5309 8.15156 41.8632 7.875 41.167 7.875ZM41.542 31.5C41.542 31.5995 41.5025 31.6948 41.4322 31.7652C41.3618 31.8355 41.2664 31.875 41.167 31.875H8.16699C8.06754 31.875 7.97215 31.8355 7.90183 31.7652C7.8315 31.6948 7.79199 31.5995 7.79199 31.5V10.5C7.79199 10.4005 7.8315 10.3052 7.90183 10.2348C7.97215 10.1645 8.06754 10.125 8.16699 10.125H41.167C41.2664 10.125 41.3618 10.1645 41.4322 10.2348C41.5025 10.3052 41.542 10.4005 41.542 10.5V31.5ZM43.792 39C43.792 39.2984 43.6735 39.5845 43.4625 39.7955C43.2515 40.0065 42.9654 40.125 42.667 40.125H6.66699C6.36862 40.125 6.08248 40.0065 5.8715 39.7955C5.66052 39.5845 5.54199 39.2984 5.54199 39C5.54199 38.7016 5.66052 38.4155 5.8715 38.2045C6.08248 37.9935 6.36862 37.875 6.66699 37.875H42.667C42.9654 37.875 43.2515 37.9935 43.4625 38.2045C43.6735 38.4155 43.792 38.7016 43.792 39Z" fill="white"></path>
+</svg></div><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6793c26e8afecba75abe3448_background-icon-blue.svg" loading="lazy" alt="" class="_3-features_icon-background"></div></div><div class="featured__title margin-xsmall-2"><h2 class="heading-style-h5">Bite-sized Video Training</h2></div><p>Manageable instruction from industry experts. Learn at your own pace.</p></div><div class="_3-features_item"><div class="featured__title margin-medium"><div class="_3-features_icon-wrapper"><div class="icon-embed-medium z-index-1 w-embed"><svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M44.166 31.9238H42.291V13.5488C42.291 12.4548 41.8564 11.4056 41.0828 10.632C40.3092 9.85842 39.26 9.42383 38.166 9.42383H11.166C10.072 9.42383 9.02279 9.85842 8.2492 10.632C7.47561 11.4056 7.04102 12.4548 7.04102 13.5488V31.9238H5.16602C4.86765 31.9238 4.5815 32.0424 4.37052 32.2533C4.15954 32.4643 4.04102 32.7505 4.04102 33.0488V36.0488C4.04102 37.1428 4.47561 38.1921 5.2492 38.9656C6.02279 39.7392 7.072 40.1738 8.16602 40.1738H41.166C42.26 40.1738 43.3092 39.7392 44.0828 38.9656C44.8564 38.1921 45.291 37.1428 45.291 36.0488V33.0488C45.291 32.7505 45.1725 32.4643 44.9615 32.2533C44.7505 32.0424 44.4644 31.9238 44.166 31.9238ZM9.29102 13.5488C9.29102 13.0515 9.48856 12.5746 9.84019 12.223C10.1918 11.8714 10.6687 11.6738 11.166 11.6738H38.166C38.6633 11.6738 39.1402 11.8714 39.4918 12.223C39.8435 12.5746 40.041 13.0515 40.041 13.5488V31.9238H9.29102V13.5488ZM43.041 36.0488C43.041 36.5461 42.8435 37.023 42.4918 37.3747C42.1402 37.7263 41.6633 37.9238 41.166 37.9238H8.16602C7.66873 37.9238 7.19182 37.7263 6.84019 37.3747C6.48856 37.023 6.29102 36.5461 6.29102 36.0488V34.1738H43.041V36.0488ZM28.791 16.5488C28.791 16.8472 28.6725 17.1333 28.4615 17.3443C28.2505 17.5553 27.9644 17.6738 27.666 17.6738H21.666C21.3676 17.6738 21.0815 17.5553 20.8705 17.3443C20.6595 17.1333 20.541 16.8472 20.541 16.5488C20.541 16.2505 20.6595 15.9643 20.8705 15.7533C21.0815 15.5424 21.3676 15.4238 21.666 15.4238H27.666C27.9644 15.4238 28.2505 15.5424 28.4615 15.7533C28.6725 15.9643 28.791 16.2505 28.791 16.5488Z" fill="currentColor"></path>
+</svg></div><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6793c26e8afecba75abe3448_background-icon-blue.svg" loading="lazy" alt="" class="_3-features_icon-background"></div></div><div class="featured__title margin-xsmall-2"><h2 class="heading-style-h5">Hands-On Learning</h2></div><p>Put your skills to the test in virtual labs, challenges, and simulated environments.</p></div><div class="_3-features_item"><div class="featured__title margin-medium"><div class="_3-features_icon-wrapper"><div class="icon-embed-medium z-index-1 w-embed"><svg width="49" height="50" viewBox="0 0 49 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.10547 22.5459V11.4992C8.10547 11.0999 8.26408 10.7169 8.54642 10.4346C8.82876 10.1523 9.21169 9.99365 9.61098 9.99365H39.7212C40.1205 9.99365 40.5034 10.1523 40.7858 10.4346C41.0681 10.7169 41.2267 11.0999 41.2267 11.4992V22.5459C41.2267 38.3537 27.8089 43.5854 25.1366 44.4699C24.833 44.5823 24.4992 44.5823 24.1956 44.4699C21.5233 43.5854 8.10547 38.3537 8.10547 22.5459Z" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M24.666 19.0269V26.5544" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M17.5146 24.2207L24.6658 26.5542" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M20.2441 32.6515L24.6666 26.5542" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M29.0885 32.6515L24.666 26.5542" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M31.8172 24.2207L24.666 26.5542" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg></div><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6793c26e8afecba75abe3448_background-icon-blue.svg" loading="lazy" alt="" class="_3-features_icon-background"></div></div><div class="featured__title margin-xsmall-2"><h2 class="heading-style-h5">Earn Industry Badges</h2></div><p>Complete coursework to earn industry-recognized badges via Credly.</p></div><div class="_3-features_item"><div class="featured__title margin-medium"><div class="_3-features_icon-wrapper"><div class="icon-embed-medium z-index-1 w-embed"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M41.625 12C41.6248 10.9357 41.3226 9.89335 40.7537 8.99393C40.1847 8.09451 39.3722 7.37497 38.4106 6.91887C37.449 6.46277 36.3777 6.28884 35.3212 6.41727C34.2647 6.5457 33.2663 6.97122 32.442 7.64442C31.6177 8.31762 31.0013 9.21086 30.6643 10.2204C30.3274 11.2299 30.2838 12.3144 30.5386 13.3477C30.7933 14.381 31.336 15.3209 32.1036 16.0581C32.8712 16.7953 33.8322 17.2997 34.875 17.5125V19.5C34.875 20.3951 34.5194 21.2536 33.8865 21.8865C33.2536 22.5194 32.3951 22.875 31.5 22.875H16.5C15.6049 22.875 14.7465 22.5194 14.1135 21.8865C13.4806 21.2536 13.125 20.3951 13.125 19.5V17.5125C14.4908 17.2337 15.7044 16.4577 16.5306 15.335C17.3568 14.2122 17.7366 12.8227 17.5965 11.4358C17.4564 10.0489 16.8063 8.76342 15.7723 7.82859C14.7383 6.89375 13.394 6.37616 12 6.37616C10.6061 6.37616 9.26174 6.89375 8.22772 7.82859C7.19369 8.76342 6.5436 10.0489 6.4035 11.4358C6.26339 12.8227 6.64324 14.2122 7.46942 15.335C8.29559 16.4577 9.50921 17.2337 10.875 17.5125V19.5C10.875 20.9919 11.4676 22.4226 12.5225 23.4775C13.5774 24.5324 15.0082 25.125 16.5 25.125H22.875V30.4875C21.5092 30.7663 20.2956 31.5423 19.4694 32.6651C18.6432 33.7878 18.2634 35.1773 18.4035 36.5642C18.5436 37.9511 19.1937 39.2366 20.2277 40.1714C21.2617 41.1063 22.6061 41.6239 24 41.6239C25.394 41.6239 26.7383 41.1063 27.7723 40.1714C28.8063 39.2366 29.4564 37.9511 29.5965 36.5642C29.7366 35.1773 29.3568 33.7878 28.5306 32.6651C27.7044 31.5423 26.4908 30.7663 25.125 30.4875V25.125H31.5C32.9919 25.125 34.4226 24.5324 35.4775 23.4775C36.5324 22.4226 37.125 20.9919 37.125 19.5V17.5125C38.3947 17.2515 39.5356 16.5607 40.3554 15.5566C41.1751 14.5524 41.6235 13.2963 41.625 12ZM8.62501 12C8.62501 11.3325 8.82295 10.68 9.1938 10.125C9.56465 9.56995 10.0918 9.13737 10.7085 8.88192C11.3252 8.62648 12.0038 8.55964 12.6584 8.68986C13.3131 8.82009 13.9145 9.14153 14.3865 9.61353C14.8585 10.0855 15.1799 10.6869 15.3102 11.3416C15.4404 11.9963 15.3736 12.6749 15.1181 13.2916C14.8627 13.9083 14.4301 14.4354 13.8751 14.8062C13.32 15.1771 12.6675 15.375 12 15.375C11.1049 15.375 10.2465 15.0194 9.61353 14.3865C8.98059 13.7536 8.62501 12.8951 8.62501 12ZM27.375 36C27.375 36.6675 27.1771 37.32 26.8062 37.8751C26.4354 38.4301 25.9083 38.8627 25.2916 39.1181C24.6749 39.3736 23.9963 39.4404 23.3416 39.3102C22.6869 39.1799 22.0855 38.8585 21.6135 38.3865C21.1415 37.9145 20.8201 37.3131 20.6899 36.6584C20.5596 36.0038 20.6265 35.3252 20.8819 34.7085C21.1374 34.0918 21.5699 33.5647 22.125 33.1938C22.68 32.823 23.3325 32.625 24 32.625C24.8951 32.625 25.7536 32.9806 26.3865 33.6135C27.0194 34.2465 27.375 35.1049 27.375 36ZM36 15.375C35.3325 15.375 34.68 15.1771 34.125 14.8062C33.5699 14.4354 33.1374 13.9083 32.8819 13.2916C32.6265 12.6749 32.5596 11.9963 32.6899 11.3416C32.8201 10.6869 33.1415 10.0855 33.6135 9.61353C34.0855 9.14153 34.6869 8.82009 35.3416 8.68986C35.9963 8.55964 36.6749 8.62648 37.2916 8.88192C37.9083 9.13737 38.4354 9.56995 38.8062 10.125C39.1771 10.68 39.375 11.3325 39.375 12C39.375 12.8951 39.0194 13.7536 38.3865 14.3865C37.7536 15.0194 36.8951 15.375 36 15.375Z" fill="white"></path>
+</svg></div><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6793c26e8afecba75abe3448_background-icon-blue.svg" loading="lazy" alt="" class="_3-features_icon-background"></div></div><div class="featured__title margin-xsmall-2"><h2 class="heading-style-h5">Practice Exams</h2></div><p>Prepare for industry certifications with insider tips and practice exams.</p></div><div class="_3-features_item"><div class="featured__title margin-medium"><div class="_3-features_icon-wrapper"><div class="icon-embed-medium z-index-1 w-embed"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M44.8449 18.2362C44.6574 17.6597 44.3034 17.1516 43.8276 16.7759C43.3518 16.4002 42.7755 16.1737 42.1712 16.125L31.1087 15.2325L26.8374 4.90311C26.6064 4.34027 26.2133 3.85882 25.708 3.51999C25.2027 3.18116 24.608 3.00024 23.9996 3.00024C23.3912 3.00024 22.7965 3.18116 22.2912 3.51999C21.7859 3.85882 21.3928 4.34027 21.1618 4.90311L16.8943 15.2306L5.82616 16.125C5.22087 16.1762 4.64414 16.4049 4.16824 16.7824C3.69234 17.1599 3.33842 17.6694 3.15084 18.2472C2.96325 18.825 2.95034 19.4453 3.11372 20.0303C3.2771 20.6154 3.6095 21.1392 4.06929 21.5362L12.5068 28.8169L9.93616 39.7031C9.79239 40.2945 9.82759 40.9153 10.0373 41.4867C10.247 42.0581 10.6217 42.5543 11.114 42.9123C11.6062 43.2703 12.1937 43.474 12.8019 43.4975C13.4101 43.521 14.0115 43.3633 14.5299 43.0444L23.9987 37.2169L33.473 43.0444C33.9916 43.3595 34.5918 43.5142 35.1982 43.4889C35.8045 43.4637 36.3897 43.2596 36.8803 42.9023C37.3708 42.5451 37.7447 42.0507 37.9548 41.4814C38.165 40.9121 38.202 40.2934 38.0612 39.7031L35.4812 28.815L43.9187 21.5344C44.3822 21.138 44.7176 20.6131 44.8825 20.0259C45.0474 19.4388 45.0343 18.8159 44.8449 18.2362ZM41.9687 19.2619L32.8374 27.1369C32.6292 27.3163 32.4743 27.5496 32.3896 27.8112C32.305 28.0727 32.2938 28.3525 32.3574 28.62L35.1474 40.395C35.1546 40.4112 35.1553 40.4296 35.1494 40.4463C35.1435 40.4631 35.1314 40.4769 35.1155 40.485C35.0818 40.5112 35.0724 40.5056 35.0443 40.485L24.7843 34.1756C24.548 34.0303 24.276 33.9534 23.9987 33.9534C23.7213 33.9534 23.4493 34.0303 23.213 34.1756L12.953 40.4887C12.9249 40.5056 12.9174 40.5112 12.8818 40.4887C12.866 40.4807 12.8538 40.4668 12.8479 40.4501C12.842 40.4333 12.8427 40.415 12.8499 40.3987L15.6399 28.6237C15.7035 28.3563 15.6924 28.0765 15.6077 27.8149C15.5231 27.5534 15.3681 27.3201 15.1599 27.1406L6.02866 19.2656C6.00616 19.2469 5.98554 19.23 6.00429 19.1719C6.02304 19.1137 6.03804 19.1212 6.06616 19.1175L18.0512 18.15C18.3261 18.1264 18.5891 18.0275 18.8114 17.8641C19.0337 17.7006 19.2066 17.4791 19.3112 17.2237L23.9274 6.04686C23.9424 6.01498 23.948 5.99998 23.993 5.99998C24.038 5.99998 24.0437 6.01498 24.0587 6.04686L28.6862 17.2237C28.7917 17.4792 28.9657 17.7005 29.189 17.8633C29.4124 18.0261 29.6763 18.124 29.9518 18.1462L41.9368 19.1137C41.9649 19.1137 41.9818 19.1137 41.9987 19.1681C42.0155 19.2225 41.9987 19.2431 41.9687 19.2619Z" fill="white"></path>
+</svg></div><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6793c26e8afecba75abe3448_background-icon-blue.svg" loading="lazy" alt="" class="_3-features_icon-background"></div></div><div class="featured__title margin-xsmall-2"><h2 class="heading-style-h5">Expertly Curated Paths</h2></div><p>Our courses are intentionally designed to keep you motivated, on track, and achieving your goals.</p></div><div class="_3-features_item"><div class="featured__title margin-medium"><div class="_3-features_icon-wrapper"><div class="icon-embed-medium z-index-1 w-embed"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M23.625 24C23.6252 24.1688 23.5873 24.3356 23.5143 24.4878C23.4413 24.64 23.3349 24.7739 23.2031 24.8794L15.7031 30.8794C15.4699 31.0659 15.1721 31.1521 14.8754 31.119C14.5786 31.0859 14.3071 30.9363 14.1206 30.7031C13.9341 30.4699 13.848 30.1722 13.881 29.8754C13.9141 29.5786 14.0637 29.3071 14.2969 29.1206L20.7 24L14.2969 18.8794C14.1814 18.787 14.0852 18.6729 14.0139 18.5434C13.9425 18.4139 13.8974 18.2716 13.881 18.1246C13.8646 17.9777 13.8774 17.8289 13.9185 17.6869C13.9596 17.5449 14.0283 17.4124 14.1206 17.2969C14.213 17.1814 14.3271 17.0852 14.4566 17.0139C14.5861 16.9425 14.7284 16.8974 14.8754 16.881C15.0223 16.8646 15.1711 16.8774 15.3131 16.9185C15.4551 16.9596 15.5876 17.0283 15.7031 17.1206L23.2031 23.1206C23.3349 23.2261 23.4413 23.36 23.5143 23.5122C23.5873 23.6644 23.6252 23.8312 23.625 24ZM33 28.875H25.5C25.2016 28.875 24.9155 28.9935 24.7045 29.2045C24.4935 29.4155 24.375 29.7016 24.375 30C24.375 30.2984 24.4935 30.5845 24.7045 30.7955C24.9155 31.0065 25.2016 31.125 25.5 31.125H33C33.2984 31.125 33.5845 31.0065 33.7955 30.7955C34.0065 30.5845 34.125 30.2984 34.125 30C34.125 29.7016 34.0065 29.4155 33.7955 29.2045C33.5845 28.9935 33.2984 28.875 33 28.875ZM43.125 10.5V37.5C43.125 38.1962 42.8484 38.8639 42.3562 39.3562C41.8639 39.8484 41.1962 40.125 40.5 40.125H7.5C6.80381 40.125 6.13613 39.8484 5.64384 39.3562C5.15156 38.8639 4.875 38.1962 4.875 37.5V10.5C4.875 9.80381 5.15156 9.13613 5.64384 8.64384C6.13613 8.15156 6.80381 7.875 7.5 7.875H40.5C41.1962 7.875 41.8639 8.15156 42.3562 8.64384C42.8484 9.13613 43.125 9.80381 43.125 10.5ZM40.875 10.5C40.875 10.4005 40.8355 10.3052 40.7652 10.2348C40.6948 10.1645 40.5995 10.125 40.5 10.125H7.5C7.40054 10.125 7.30516 10.1645 7.23483 10.2348C7.16451 10.3052 7.125 10.4005 7.125 10.5V37.5C7.125 37.5995 7.16451 37.6948 7.23483 37.7652C7.30516 37.8355 7.40054 37.875 7.5 37.875H40.5C40.5995 37.875 40.6948 37.8355 40.7652 37.7652C40.8355 37.6948 40.875 37.5995 40.875 37.5V10.5Z" fill="white"></path>
+</svg></div><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/6793c26e8afecba75abe3448_background-icon-blue.svg" loading="lazy" alt="" class="_3-features_icon-background"></div></div><div class="featured__title margin-xsmall-2"><h2 class="heading-style-h5">Community of Professionals</h2></div><p>Connect with peers and industry experts through our supportive community of cybersecurity professionals.</p></div></div></div></div></div></div></div></div><section class="section_testimonial-slider"><div class="hide w-embed w-script"><!-- Swiper CSS -->
+<link rel="stylesheet" href="../_external/cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+
+<!-- Swiper JS -->
+<script src="../_external/cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script></div><div class="padding-global"><div class="page-unique-css w-embed"><style> 
+
+.testimonial-slider_item.swiper-slide-next, .testimonial-slider_item.swiper-slide-prev {
+	height: 95%;
+  background-color: #101316;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.testimonial-slider_item.is-active {
+	opacity: 1 !important;
+}
+
+.testimonial-slider_item {
+	opacity: 0 !important;
+}
+
+.testimonial-slider_background-cards.is-medium {
+	width: calc(100% + 3rem);
+}
+
+.testimonial-slider_background-cards.is-small {
+	width: calc(100% + 6rem);
+}
+
+
+
+</style></div><div class="container-large"><div class="padding-section-120 padding-section-medium"><div class="w-layout-grid testimonial-slider_component"><div class="testimonial-slider_content"><div class="margin-bottom margin-small"><h2 class="cs-heading-style-h1-smaller">Our Learners Love Nethub</h2></div><p>See what our happy customers have to say about our online cybersecurity courses and cybersecurity training.</p></div><div id="w-node-_2fcd72fd-d224-f59a-b6b1-e4d8f2ec8f82-704377f1" class="testimonial-slider_slider w-dyn-list"><div role="list" class="testimonial-slider_list w-dyn-items"><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>Nethub is just an amazing platform. Literally thousands of hours of quality content. You can find a course or a lab for just about everything, and they are constantly releasing new material. They also have highly responsive customer service. It's been worth every penny.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Jared</div><div class="testimonial-slider_position w-dyn-bind-empty"></div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>Greatest investment I have made to dateNethub is solely responsible for my passing the CompTIA A+ exam and is the reason I am going into my Net+ with confidence. I have learned a great deal through virtual labs, practice tests, recorded lessons, and the various other things they offer. The community is great as well. It is an all around wonderful experience and I rate it as a totally worthwile expense for starting or furthering your career in the IT industry. Invest in yourself.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Bradly</div><div class="testimonial-slider_position w-dyn-bind-empty"></div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>Training is coolEasy to enroll, instructors are enthusiastic and professionnal, technical stuff is very well explained.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">JPM</div><div class="testimonial-slider_position w-dyn-bind-empty"></div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>I've been having concerns on how to start in terms of building my #cybercareer with a sustained path. So I got introduced to Nethub and I was able to enroll and startup early last week and I have gone through two sessions, getting to know Nethub and also a view of what cybersecurity is from their perspective. That gave me an overall view of what jobs are found in the space, their general responsibilities, required skills, necessary certifications and their average salary pay... Nethub has given me a greater reason to pursue my hearts desire at all cost.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Jamal O.</div><div class="testimonial-slider_position">Student</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>Thanks to Nethub I'm now a more complete professional! Everyone in [the] cybersecurity area should consider enrollment in any Nethub courses.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">João S.</div><div class="testimonial-slider_position">IT Administrator - CISSP</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>The interviewer said the certifications and training I had completed on my own time showed that I was a quick learner, and they gave me a job offer.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Justin B.</div><div class="testimonial-slider_position">IT Specialist</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>Our partnership with Nethub has given us the opportunity to provide world-class training materials at no cost to our clients, thanks to the funding we’ve received from the government. Nethub offers a proven method for building a more skilled cybersecurity workforce.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Katie Adams</div><div class="testimonial-slider_position">Senior Director</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>All of the knowledge, skills, and abilities gained through the program were essential to me impressing the employer during the interview.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Gabby H.</div><div class="testimonial-slider_position">Senior Security Analyst</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>Nethub is a one-stop-shop for my cybersecurity learning needs. Courses on vulnerability management, threat intelligence, and SIEM solutions were key for my early roles. As I grow into leadership roles influencing business policy, I’m confident Nethub will continue developing the knowledge and skills I need to succeed.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name w-condition-invisible">No Name</div><div class="testimonial-slider_position">Senior Cybersecurity Consultant and Virtual CISO</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>After tens of minutes, I proudly have achieved my certificate of continuing education for Intro to Infosec... Doing everything I can to avoid retaking the CISSP test! Thanks Nethub - 1 CPE at a time!</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Alex H.</div><div class="testimonial-slider_position w-dyn-bind-empty"></div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>We’ve had six students this summer, all with different schedules, so we’ve been trying to balance their learning experience with some practical work. It’s not like they’re all sitting in a classroom at the same time, so the ability for them to learn at their own pace without any additional support has probably been the biggest benefit of using Nethub.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Collin Ricker</div><div class="testimonial-slider_position">Business Development Manager</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef1be981a383fb127661f/645897dfcb6d110f274c54ba_1634601056461.webp" loading="lazy" alt="" class="free-trusted_avatar"></div><div class="text-color-silver text-size-medium w-richtext"><p>Just finished the third out of four MITRE ATT&amp;CK Defender courses on Nethub... If anyone is interested in learning how to do ATT&amp;CK based SOC assessments I would definitely recommend this course. The best part is that it is FREE!</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Eric T.</div><div class="testimonial-slider_position">AWS Certified Cloud Practitioner</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>Excellent new series of courses from Nethub, each course covers a different CVE, demonstrates vulnerability and its mitigation.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Raul C.</div><div class="testimonial-slider_position">Cybersecurity Specialist</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef1be981a383fb127661f/645897c92d5b6d1b70ca0dbd_Wissal.webp" loading="lazy" alt="" class="free-trusted_avatar"></div><div class="text-color-silver text-size-medium w-richtext"><p>I've successfully completed the career path provided by Nethub to become a SOC Analyst - Level 2. Eventually, do what you love, and do it well - that's much more meaningful than any metric.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Wissal Ayari</div><div class="testimonial-slider_position">SOC Analyst</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>Nethub is helping me proactively build skills and advance my career. Labs put concepts immediately into practice, reinforcing the content (and saving me time not having to spin up my own VM). Career paths lay everything out clearly, so I know what skills to prioritize.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name w-condition-invisible">No Name</div><div class="testimonial-slider_position">Enterprise Analyst</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>I got a job as a cybersecurity analyst at Radware with a salary I've never even dreamed about AND with no prior experience.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Alexei Z.</div><div class="testimonial-slider_position">Cybersecurity Analyst</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>Thank you to Nethub for providing this opportunity to complete the Nethub Orientation Certification program with such sleekness and detail-oriented learning.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Ganesh Y.</div><div class="testimonial-slider_position w-dyn-bind-empty"></div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef1be981a383fb127661f/6458977e8f383fcc56d34fa4_1678583959227.webp" loading="lazy" alt="" class="free-trusted_avatar"></div><div class="text-color-silver text-size-medium w-richtext"><p>So far I have really been enjoying Nethub's SOC Analyst Training, it has been very informative. I just finished up with the command line section and now I'm on to the more fun stuff (Malware Analysis). I think it's so dope that platforms like this exist. This is a game changer.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Tobias Castleberry</div><div class="testimonial-slider_position">SOC Analyst, Security+ Certified</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>I decided to check out Nethub and the courses they had to offer after seeing a few posts from people who had completed their courses. I'm happy to say that their instructors are knowledgeable and clear, and their course catalogues are extensive and offer relevant career path courses.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Nazli S.</div><div class="testimonial-slider_position">AWS Certified Cloud Practitioner</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>Glad to have discovered Nethub they are such a great tool to use to help diversify your knowledge through lessons, assessments and practices. All compact[ed] into highly detailed and informative chunks of information. Feeling very content with the results.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Temi B.</div><div class="testimonial-slider_position">Cisco Certified Network Associate</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef1be981a383fb127661f/645897768f383f7584d34c45_Madiraju.webp" loading="lazy" alt="" class="free-trusted_avatar"></div><div class="text-color-silver text-size-medium w-richtext"><p>Well, it took a long time, yet I struggled hard to complete the course "Become a SOC Analyst - Level 2" by Nethub. Nethub is the best platform that I have ever come across. Tons of virtual labs, great in-depth insights from the experts, and the best career path/learning modules.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Madiraju Pranay Kashyap</div><div class="testimonial-slider_position">Programmar Analyst Trainee</div></div></div></div></div><div role="listitem" class="testimonial-slider_item w-dyn-item"><div class="testimonial-slider_slide-content"><div class="testimonial-slider_avatar-wrapper w-condition-invisible"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="free-trusted_avatar w-condition-invisible w-dyn-bind-empty"></div><div class="text-color-silver text-size-medium w-richtext"><p>I am currently working in a restaurant and going to school full time. But it is not stopping me from working on gaining more and more skills. I have already spent more than 30 hours on Become a SOC Analyst level 1 [with] Nethub and still have 67 hours to go.</p></div><div class="testimonial-slider_details-wrapper"><div class="testimonial-slider_icon-wrapper"><img src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/643e7f5cca79b16d7e02223d_quotation-mark.webp" loading="lazy" alt="" class="testimonial-slider_icon"></div><div class="testimonial-slider_details-text"><div class="testimonial-slider_name">Abibou F.</div><div class="testimonial-slider_position">SOC Analyst Level 1 Learner</div></div></div></div></div></div></div><div class="margin-top margin-large"><div class="testimonial-slider_navigation-wrapper"><div class="testimonial-slider_buttons-wrapper"><a aria-label="previous slide button" href="." class="testimonial-slider_prev-button w-inline-block"><div class="testimonial-slider_arrow is-square w-embed"><svg width="8" height="15" viewBox="0 0 8 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.99963 14.01L1.73346 8.21722C1.31736 7.75951 1.31736 7.06051 1.73346 6.6028L6.99963 0.81001" stroke="currentColor" stroke-width="1.8"></path>
+</svg></div></a><a aria-label="next slide button" href="." class="testimonial-slider_next-button w-inline-block"><div class="testimonial-slider_arrow is-square w-embed"><svg width="8" height="15" viewBox="0 0 8 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.99963 14.01L1.73346 8.21722C1.31736 7.75951 1.31736 7.06051 1.73346 6.6028L6.99963 0.81001" stroke="currentColor" stroke-width="1.8"></path>
+</svg></div></a></div></div></div></div></div></div></div><div class="hide w-embed w-script"><script defer="">
+
+// Define the testimonialSliderCreation function
+function testimonialSliderCreation() {
+  // Select all elements with the class "section_testimonial-slider"
+  const testimonialSliders = document.querySelectorAll(
+    ".section_testimonial-slider"
+  );
+
+  // Loop through all "section_testimonial-slider" elements
+  testimonialSliders.forEach((slider) => {
+    // Create a new Swiper slider instance for each testimonial slider
+    var testimonialSlider = new Swiper(
+      slider.querySelector(".testimonial-slider_slider"),
+      {
+        wrapperClass: "testimonial-slider_list",
+        slideClass: "testimonial-slider_item",
+        direction: "horizontal",
+        speed: 400,
+        loop: true,
+        spaceBetween: 24,
+        effect: "creative",
+        creativeEffect: {
+          prev: {
+            translate: [-24, 0, 0]
+          },
+          next: {
+            translate: [24, 0, 0]
+          }
+        },
+        pagination: {
+          el: slider.querySelector(".testimonial-slider_pagination"),
+          bulletActiveClass: "is-active",
+          bulletClass: "testimonial-slider_pagination-dot",
+          bulletElement: "button",
+          clickable: true
+        },
+        navigation: {
+          nextEl: slider.querySelector(".testimonial-slider_next-button"),
+          prevEl: slider.querySelector(".testimonial-slider_prev-button"),
+          disabledClass: "is-disabled"
+        },
+        slideActiveClass: "is-active",
+        slideDuplicateActiveClass: "is-active"
+      }
+    );
+  });
+}
+
+// Call the testimonialSliderCreation function once when the page loads
+testimonialSliderCreation();
+
+</script></div></section></main><footer class="section_footer"><div class="padding-global-11"></div><footer class="footer_main-component"><div id="w-node-bc2d5682-3e29-e66e-9a6e-05b025f90e60-76ec486f" class="footer_css w-embed"><style>
+.footer_link svg {
+  transition: transform 350ms;
+}
+
+.footer_link:hover svg {
+	transform: translate(0.5rem, 0rem)
+}
+
+.footer_social-bubble svg {
+	z-index: 2
+}
+
+.footer_social-bubble:hover .footer_gradient-overlay {
+	opacity: 1 !important
+}
+
+.footer_gradient-overlay {
+	pointer-events: none !important
+}
+
+
+</style></div><div class="padding-global-11 is--footer"><div class="container-large"><div class="padding-vertical padding-xxlarge no-top"><div class="footer_newsletter-wrapper"><a href="." aria-label="logo link to home page" class="w-inline-block"><div class="footer_newsletter-text-wrapper"><div class="w-embed"><svg width="120" height="17" viewBox="0 0 120 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8882 2.6885C13.4823 2.3212 12.8636 1.83791 12.0324 1.43194C11.6264 1.22896 7.57642 -0.684882 3.82606 1.64459C0.86831 3.47144 0.230363 6.60317 0.133705 7.09613C0.0370461 7.62776 -0.552571 11.0785 1.84456 13.8526C3.7584 16.066 6.32952 16.4044 7.14145 16.501C7.95339 16.5977 10.1765 16.82 12.2837 15.4571C13.1633 14.8868 13.7529 14.2199 14.1009 13.7462C13.4243 12.9826 12.7477 12.219 12.071 11.4554C11.8197 11.7454 11.4041 12.1417 10.8241 12.4993C10.4182 12.741 9.16162 13.4756 7.49909 13.2243C7.17045 13.176 6.04921 12.9923 5.05363 12.0837C3.30411 10.4792 3.57475 8.11105 3.59408 7.9274C3.62308 7.71475 3.98072 5.26929 6.1362 4.23504C7.97272 3.36511 10.3215 3.88707 11.8487 5.58826C12.4577 4.84399 13.0956 4.09972 13.7722 3.35545C13.8786 3.23946 13.9849 3.1138 14.0912 2.99781" fill="white"></path>
+<path d="M25.7289 6.81578C24.5787 4.88261 23.4284 2.95911 22.2782 1.02594C20.925 0.967941 19.5717 0.90028 18.2089 0.842285C20.1807 3.94502 22.1525 7.04776 24.1244 10.1408C24.1244 12.1707 24.1244 14.1908 24.1244 16.2207C25.2746 16.211 26.4248 16.2013 27.5751 16.1917C27.5751 14.1618 27.5751 12.132 27.5751 10.1022C29.5276 7.02843 31.4801 3.95469 33.4229 0.880948C32.147 0.880948 30.8615 0.880948 29.5856 0.880948C28.3967 2.90111 27.1981 4.92128 26.0092 6.94144C25.9609 6.94144 25.9029 6.94144 25.8546 6.94144C25.8256 6.92211 25.8062 6.89311 25.7772 6.87378" fill="white"></path>
+<path d="M53.5375 0.958296C54.2817 1.99254 55.026 3.02679 55.7703 4.06104C57.9838 4.06104 60.2069 4.06104 62.4204 4.06104C62.5847 4.09003 62.8167 4.14803 63.068 4.29302C63.6963 4.64099 63.9476 5.21127 64.0249 5.39492C64.0926 5.56891 64.3729 6.27452 64.0249 7.04779C63.677 7.80172 62.981 8.0627 62.8457 8.11103C62.7587 8.14003 62.6814 8.16903 62.5944 8.19802C61.2702 8.20769 59.9556 8.21735 58.6314 8.22702C60.4679 10.9141 62.3044 13.6109 64.1409 16.298C65.5038 16.298 66.857 16.2883 68.2199 16.2883C66.973 14.4615 65.7261 12.625 64.4696 10.7981C64.5082 10.7885 64.5566 10.7691 64.6145 10.7498C65.8034 10.3535 66.4801 9.44492 66.712 9.14528C66.8377 8.97129 67.1953 8.459 67.437 7.70506C67.7463 6.72881 67.6883 5.90721 67.6496 5.44325C67.6206 5.07595 67.5916 4.68932 67.437 4.22536C67.3596 3.99338 66.9537 2.80448 65.7744 1.97321C65.1752 1.54791 64.5855 1.37393 63.9863 1.19028C63.5513 1.06462 63.184 0.987294 62.9134 0.938965" fill="white"></path>
+<path d="M87.6774 0.929488C88.4216 1.96373 89.1659 2.99798 89.9102 4.03223C92.1237 4.03223 94.3468 4.03223 96.5603 4.03223C96.7246 4.06123 96.9566 4.11922 97.2079 4.26421C97.8362 4.61218 98.0875 5.18247 98.1648 5.36612C98.2325 5.5401 98.5128 6.24571 98.1648 7.01898C97.8168 7.77291 97.1209 8.03389 96.9856 8.08222C96.8986 8.11122 96.8213 8.14022 96.7343 8.16922C95.4101 8.17888 94.0955 8.18855 92.7713 8.19821C94.6078 10.8853 96.4443 13.5821 98.2808 16.2692C99.6437 16.2692 100.997 16.2595 102.36 16.2595C101.113 14.4327 99.866 12.5962 98.6095 10.7693C98.6481 10.7597 98.6965 10.7403 98.7544 10.721C99.9433 10.3247 100.62 9.41611 100.852 9.11647C100.978 8.94248 101.335 8.43019 101.577 7.67626C101.886 6.7 101.828 5.87841 101.79 5.41445C101.761 5.04714 101.732 4.66051 101.577 4.19655C101.5 3.96457 101.094 2.77567 99.9143 1.9444C99.3151 1.5191 98.7254 1.34512 98.1262 1.16147C97.6912 1.03581 97.3239 0.958486 97.0532 0.910156" fill="white"></path>
+<path d="M112.306 6.88366C111.156 4.95048 110.005 3.02698 108.855 1.09381C107.502 1.03581 106.149 0.968151 104.786 0.910156C106.758 4.0129 108.73 7.11564 110.701 10.2087C110.701 12.2385 110.701 14.2587 110.701 16.2885C111.852 16.2789 113.002 16.2692 114.152 16.2595C114.152 14.2297 114.152 12.1999 114.152 10.17C116.105 7.0963 118.057 4.02256 120 0.94882C118.724 0.94882 117.439 0.94882 116.163 0.94882C114.974 2.96898 113.775 4.98915 112.586 7.00931C112.538 7.00931 112.48 7.00931 112.432 7.00931C112.403 6.98998 112.383 6.96098 112.354 6.94165" fill="white"></path>
+<path d="M81.4719 0.900391C80.428 0.900391 79.3841 0.910056 78.3305 0.910056C76.1654 6.04263 74.0002 11.1655 71.8447 16.2981C72.9853 16.2884 74.1259 16.2788 75.2664 16.2691C75.7691 15.1285 76.262 13.9783 76.7646 12.8377C78.8428 12.8281 80.9113 12.8184 82.9895 12.8184C83.5114 13.9783 84.0334 15.1382 84.5553 16.2981C85.7346 16.2981 86.9138 16.2884 88.1027 16.2884C85.8892 11.1559 83.6757 6.03296 81.4719 0.900391ZM77.9922 9.68666C78.6302 8.11112 79.2681 6.52592 79.906 4.95039C80.5923 6.51625 81.2786 8.09179 81.9552 9.65766C80.6407 9.66732 79.3164 9.67699 77.9922 9.68666Z" fill="white"></path>
+<path d="M51.5464 11.9869C51.5367 11.5327 51.527 10.943 51.2081 10.3051C50.7441 9.38683 49.9322 8.91321 49.4102 8.61356C49.1492 8.45891 48.9172 8.35259 48.7529 8.28493C48.8303 8.24626 48.9462 8.1786 49.0719 8.09161C49.2749 7.95629 49.8548 7.56965 50.2511 6.89304C50.6474 6.20677 50.6764 5.54949 50.6861 5.17252C50.6958 4.78589 50.7151 3.61632 49.8838 2.54341C48.8786 1.25785 47.3997 1.08386 47.1291 1.05487C44.2293 1.02587 41.3392 1.00654 38.4395 0.977539C38.4491 6.08111 38.4685 11.1847 38.4781 16.2883L38.6328 16.2979C41.5809 16.2689 44.5289 16.2496 47.4674 16.2206C48.2406 16.1143 48.8399 15.8823 49.2169 15.689C49.5455 15.5247 49.9805 15.3023 50.4348 14.848C50.9471 14.3358 51.1791 13.8235 51.2371 13.7075C51.556 13.0019 51.556 12.3832 51.5464 11.9869ZM41.7162 3.61632L46.0948 3.65498C46.1238 3.65498 46.1625 3.65498 46.2011 3.66465C46.7424 3.75164 47.332 4.41858 47.332 5.17252C47.332 6.07145 46.5201 6.57407 46.4138 6.63206C46.3461 6.67073 46.2881 6.69973 46.2398 6.71906C44.7416 6.73839 43.2434 6.75772 41.7548 6.77705C41.7355 5.72347 41.7258 4.6699 41.7162 3.61632ZM46.9744 13.0695C46.8971 13.1082 46.8294 13.1372 46.7811 13.1565C45.1282 13.1758 43.4657 13.1952 41.8128 13.2145C41.8032 12.1513 41.7935 11.0784 41.7742 10.0151L46.6458 9.99578C46.6748 9.99578 46.7134 9.99578 46.7618 10.0054C47.3417 10.1021 47.999 10.7691 47.9893 11.5906C47.97 12.5282 47.0807 13.0212 46.9744 13.0695Z" fill="white"></path>
+</svg></div></div></a><div class="footer_social-links"><a aria-label="linkedin link" href="https://www.linkedin.com/company/cybrary/" target="_blank" class="footer_social-bubble w-inline-block"><div class="embed-wrapper w-embed"><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_601_2764)">
+<path d="M14.8156 0.5H1.18125C0.528125 0.5 0 1.01563 0 1.65313V15.3438C0 15.9813 0.528125 16.5 1.18125 16.5H14.8156C15.4688 16.5 16 15.9813 16 15.3469V1.65313C16 1.01563 15.4688 0.5 14.8156 0.5ZM4.74687 14.1344H2.37188V6.49687H4.74687V14.1344ZM3.55938 5.45625C2.79688 5.45625 2.18125 4.84062 2.18125 4.08125C2.18125 3.32188 2.79688 2.70625 3.55938 2.70625C4.31875 2.70625 4.93437 3.32188 4.93437 4.08125C4.93437 4.8375 4.31875 5.45625 3.55938 5.45625ZM13.6344 14.1344H11.2625V10.4219C11.2625 9.5375 11.2469 8.39687 10.0281 8.39687C8.79375 8.39687 8.60625 9.3625 8.60625 10.3594V14.1344H6.2375V6.49687H8.5125V7.54063H8.54375C8.85938 6.94063 9.63438 6.30625 10.7875 6.30625C13.1906 6.30625 13.6344 7.8875 13.6344 9.94375V14.1344Z" fill="white"></path>
+</g>
+<defs>
+<clipPath id="clip0_601_2764">
+<rect width="16" height="16" fill="white" transform="translate(0 0.5)"></rect>
+</clipPath>
+</defs>
+</svg></div><div class="footer_gradient-overlay is-alternate-gradient"></div></a><a aria-label="twitter link" href="https://twitter.com/cybraryIT" target="_blank" class="footer_social-bubble w-inline-block"><div class="embed-wrapper w-embed"><svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.03344 13.0005C11.0697 13.0005 14.3722 7.99829 14.3722 3.66173C14.3722 3.5211 14.3691 3.37735 14.3628 3.23673C15.0052 2.77213 15.5597 2.19666 16 1.53735C15.4017 1.80356 14.7664 1.97741 14.1159 2.05298C14.8009 1.64243 15.3137 0.99747 15.5594 0.237666C14.915 0.619527 14.2104 0.888896 13.4756 1.03423C12.9806 0.508196 12.326 0.159899 11.6131 0.043189C10.9003 -0.0735213 10.1688 0.0478552 9.53183 0.388553C8.89486 0.72925 8.38787 1.27029 8.08923 1.92803C7.7906 2.58577 7.71695 3.32357 7.87969 4.02735C6.575 3.96188 5.29862 3.62296 4.13332 3.03255C2.96802 2.44215 1.9398 1.61345 1.11531 0.600166C0.696266 1.32265 0.568038 2.17759 0.756687 2.99122C0.945337 3.80485 1.43671 4.51612 2.13094 4.98048C1.60975 4.96393 1.09998 4.82361 0.64375 4.5711V4.61173C0.643283 5.36992 0.905399 6.10488 1.38554 6.69167C1.86568 7.27846 2.53422 7.68086 3.2775 7.83048C2.7947 7.96257 2.28799 7.98182 1.79656 7.88673C2.0063 8.53878 2.41438 9.10908 2.96385 9.51804C3.51331 9.92701 4.17675 10.1542 4.86156 10.168C3.69895 11.0812 2.26278 11.5766 0.784375 11.5742C0.522191 11.5738 0.260266 11.5578 0 11.5261C1.5019 12.4897 3.24902 13.0014 5.03344 13.0005Z" fill="white"></path>
+</svg></div><div class="footer_gradient-overlay is-alternate-gradient"></div></a><a aria-label="instagram link" href="https://www.instagram.com/cybrary.it" target="_blank" class="footer_social-bubble w-inline-block"><div class="embed-wrapper w-embed"><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_601_2774)">
+<path d="M8 1.94062C10.1375 1.94062 10.3906 1.95 11.2313 1.9875C12.0125 2.02187 12.4344 2.15313 12.7156 2.2625C13.0875 2.40625 13.3563 2.58125 13.6344 2.85938C13.9156 3.14063 14.0875 3.40625 14.2313 3.77813C14.3406 4.05938 14.4719 4.48437 14.5063 5.2625C14.5438 6.10625 14.5531 6.35938 14.5531 8.49375C14.5531 10.6313 14.5438 10.8844 14.5063 11.725C14.4719 12.5063 14.3406 12.9281 14.2313 13.2094C14.0875 13.5813 13.9125 13.85 13.6344 14.1281C13.3531 14.4094 13.0875 14.5813 12.7156 14.725C12.4344 14.8344 12.0094 14.9656 11.2313 15C10.3875 15.0375 10.1344 15.0469 8 15.0469C5.8625 15.0469 5.60938 15.0375 4.76875 15C3.9875 14.9656 3.56563 14.8344 3.28438 14.725C2.9125 14.5813 2.64375 14.4063 2.36563 14.1281C2.08438 13.8469 1.9125 13.5813 1.76875 13.2094C1.65938 12.9281 1.52813 12.5031 1.49375 11.725C1.45625 10.8813 1.44688 10.6281 1.44688 8.49375C1.44688 6.35625 1.45625 6.10312 1.49375 5.2625C1.52813 4.48125 1.65938 4.05938 1.76875 3.77813C1.9125 3.40625 2.0875 3.1375 2.36563 2.85938C2.64688 2.57813 2.9125 2.40625 3.28438 2.2625C3.56563 2.15313 3.99063 2.02187 4.76875 1.9875C5.60938 1.95 5.8625 1.94062 8 1.94062ZM8 0.5C5.82813 0.5 5.55625 0.509375 4.70313 0.546875C3.85313 0.584375 3.26875 0.721875 2.7625 0.91875C2.23438 1.125 1.7875 1.39688 1.34375 1.84375C0.896875 2.2875 0.625 2.73438 0.41875 3.25938C0.221875 3.76875 0.084375 4.35 0.046875 5.2C0.009375 6.05625 0 6.32813 0 8.5C0 10.6719 0.009375 10.9438 0.046875 11.7969C0.084375 12.6469 0.221875 13.2313 0.41875 13.7375C0.625 14.2656 0.896875 14.7125 1.34375 15.1563C1.7875 15.6 2.23438 15.875 2.75938 16.0781C3.26875 16.275 3.85 16.4125 4.7 16.45C5.55313 16.4875 5.825 16.4969 7.99688 16.4969C10.1688 16.4969 10.4406 16.4875 11.2938 16.45C12.1438 16.4125 12.7281 16.275 13.2344 16.0781C13.7594 15.875 14.2063 15.6 14.65 15.1563C15.0938 14.7125 15.3688 14.2656 15.5719 13.7406C15.7688 13.2313 15.9063 12.65 15.9438 11.8C15.9813 10.9469 15.9906 10.675 15.9906 8.50313C15.9906 6.33125 15.9813 6.05938 15.9438 5.20625C15.9063 4.35625 15.7688 3.77188 15.5719 3.26563C15.375 2.73438 15.1031 2.2875 14.6563 1.84375C14.2125 1.4 13.7656 1.125 13.2406 0.921875C12.7313 0.725 12.15 0.5875 11.3 0.55C10.4438 0.509375 10.1719 0.5 8 0.5Z" fill="white"></path>
+<path d="M8 4.39062C5.73125 4.39062 3.89062 6.23125 3.89062 8.5C3.89062 10.7688 5.73125 12.6094 8 12.6094C10.2688 12.6094 12.1094 10.7688 12.1094 8.5C12.1094 6.23125 10.2688 4.39062 8 4.39062ZM8 11.1656C6.52813 11.1656 5.33437 9.97188 5.33437 8.5C5.33437 7.02813 6.52813 5.83437 8 5.83437C9.47188 5.83437 10.6656 7.02813 10.6656 8.5C10.6656 9.97188 9.47188 11.1656 8 11.1656Z" fill="white"></path>
+<path d="M13.2312 4.22793C13.2312 4.75918 12.8 5.18731 12.2719 5.18731C11.7406 5.18731 11.3125 4.75606 11.3125 4.22793C11.3125 3.69668 11.7438 3.26855 12.2719 3.26855C12.8 3.26855 13.2312 3.69981 13.2312 4.22793Z" fill="white"></path>
+</g>
+<defs>
+<clipPath id="clip0_601_2774">
+<rect width="16" height="16" fill="white" transform="translate(0 0.5)"></rect>
+</clipPath>
+</defs>
+</svg></div><div class="footer_gradient-overlay is-alternate-gradient"></div></a><a aria-label="facebook link" href="https://www.facebook.com/cybraryit" target="_blank" class="footer_social-bubble w-inline-block"><div class="embed-wrapper w-embed"><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_601_2781)">
+<path d="M16 8.5C16 4.08172 12.4183 0.5 8 0.5C3.58172 0.5 0 4.08172 0 8.5C0 12.493 2.92547 15.8027 6.75 16.4028V10.8125H4.71875V8.5H6.75V6.7375C6.75 4.7325 7.94438 3.625 9.77172 3.625C10.6467 3.625 11.5625 3.78125 11.5625 3.78125V5.75H10.5538C9.56 5.75 9.25 6.36672 9.25 7V8.5H11.4688L11.1141 10.8125H9.25V16.4028C13.0745 15.8027 16 12.493 16 8.5Z" fill="white"></path>
+</g>
+<defs>
+<clipPath id="clip0_601_2781">
+<rect width="16" height="16" fill="white" transform="translate(0 0.5)"></rect>
+</clipPath>
+</defs>
+</svg></div><div class="footer_gradient-overlay is-alternate-gradient"></div></a><a aria-label="twitch.tv link" href="https://www.twitch.tv/cybrary/" target="_blank" class="footer_social-bubble w-inline-block"><div class="embed-wrapper w-embed"><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_601_2784)">
+<path d="M4.73438 1.5L2 4.17857V13.8214H5.28125V16.5L8.01562 13.8214H10.2031L15.125 9V1.5H4.73438ZM14.0312 8.46429L11.8438 10.6071H9.65625L7.74219 12.4821V10.6071H5.28125V2.57143H14.0312V8.46429Z" fill="white"></path>
+<path d="M12.3125 4.3125H11.375V8.0625H12.3125V4.3125Z" fill="white"></path>
+<path d="M9.5 4.3125H8.5625V8.0625H9.5V4.3125Z" fill="white"></path>
+</g>
+<defs>
+<clipPath id="clip0_601_2784">
+<rect width="16" height="16" fill="white" transform="translate(0 0.5)"></rect>
+</clipPath>
+</defs>
+</svg></div><div class="footer_gradient-overlay is-alternate-gradient"></div></a><a aria-label="youtube link" href="https://www.youtube.com/@NethubIt" target="_blank" class="footer_social-bubble w-inline-block"><div class="embed-wrapper w-embed"><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.8406 5.3002C15.8406 5.3002 15.6844 4.19707 15.2031 3.7127C14.5938 3.0752 13.9125 3.07207 13.6 3.03457C11.3625 2.87207 8.00313 2.87207 8.00313 2.87207H7.99687C7.99687 2.87207 4.6375 2.87207 2.4 3.03457C2.0875 3.07207 1.40625 3.0752 0.796875 3.7127C0.315625 4.19707 0.1625 5.3002 0.1625 5.3002C0.1625 5.3002 0 6.59707 0 7.89082V9.10332C0 10.3971 0.159375 11.6939 0.159375 11.6939C0.159375 11.6939 0.315625 12.7971 0.79375 13.2814C1.40313 13.9189 2.20313 13.8971 2.55938 13.9658C3.84063 14.0877 8 14.1252 8 14.1252C8 14.1252 11.3625 14.1189 13.6 13.9596C13.9125 13.9221 14.5938 13.9189 15.2031 13.2814C15.6844 12.7971 15.8406 11.6939 15.8406 11.6939C15.8406 11.6939 16 10.4002 16 9.10332V7.89082C16 6.59707 15.8406 5.3002 15.8406 5.3002ZM6.34688 10.5752V6.07832L10.6687 8.33457L6.34688 10.5752Z" fill="white"></path>
+</svg></div><div class="footer_gradient-overlay is-alternate-gradient"></div></a></div></div><div class="padding-vertical padding-custom-footer"><div class="line-divider"></div></div><div class="w-layout-grid footer_top-wrapper"><div class="footer_link-list open"><div class="footer_title-wrapper"><div class="footer_column-heading">Solutions</div><div class="show-mobile-landscape"><div class="embed-wrapper w-embed"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.81836 1.00024L5.49103 4.02509C5.10961 4.37183 4.52711 4.37183 4.14569 4.02509L0.818359 1.00024" stroke="#8A90A8" stroke-width="1.5"></path>
+</svg></div></div></div><a href="." class="footer_link-2 w-inline-block"><div>For Individuals</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a><a href="." class="footer_link-2 w-inline-block"><div>For Teams</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a><a href="." class="footer_link-2 w-inline-block"><div>Government</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a></div><div class="footer_link-list"><div class="footer_title-wrapper"><div class="footer_column-heading">Company</div><div class="show-mobile-landscape"><div class="embed-wrapper w-embed"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.81836 1.00024L5.49103 4.02509C5.10961 4.37183 4.52711 4.37183 4.14569 4.02509L0.818359 1.00024" stroke="#8A90A8" stroke-width="1.5"></path>
+</svg></div></div></div><a href="." class="footer_link-2 w-inline-block"><div>About</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a><a href="." class="footer_link-2 w-inline-block"><div>Careers</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a><a href="." class="footer_link-2 w-inline-block"><div>Press</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a><a href="../cybrary-impact-hub.html" class="footer_link-2 w-inline-block"><div>Nethub Impact Hub</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a></div><div class="footer_link-list"><div class="footer_title-wrapper"><div class="footer_column-heading">Platform</div><div class="show-mobile-landscape"><div class="embed-wrapper w-embed"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.81836 1.00024L5.49103 4.02509C5.10961 4.37183 4.52711 4.37183 4.14569 4.02509L0.818359 1.00024" stroke="#8A90A8" stroke-width="1.5"></path>
+</svg></div></div></div><a href="." class="footer_link-2 w-inline-block"><div>Catalog</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a><a href="." class="footer_link-2 w-inline-block"><div>Instructors</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a><a href="." class="footer_link-2 w-inline-block"><div>Alliances</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a></div><div class="footer_link-list"><div class="footer_title-wrapper"><div class="footer_column-heading">Resources</div><div class="show-mobile-landscape"><div class="embed-wrapper w-embed"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.81836 1.00024L5.49103 4.02509C5.10961 4.37183 4.52711 4.37183 4.14569 4.02509L0.818359 1.00024" stroke="#8A90A8" stroke-width="1.5"></path>
+</svg></div></div></div><a href="." class="footer_link-2 w-inline-block"><div>Blog</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a><a href="https://help.cybrary.it/hc/en-us" class="footer_link-2 w-inline-block"><div>Help Center</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a><a href="." class="footer_link-2 w-inline-block"><div>The Nethub Podcast</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a><a href="." class="footer_link-2 w-inline-block"><div>Report a Vulnerability</div><div class="w-embed"><svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L4.02484 4.82733C4.37159 5.20875 4.37159 5.79125 4.02484 6.17267L1 9.5" stroke="currentColor" stroke-width="1.5"></path>
+</svg></div></a></div></div><div class="footer_bottom-wrapper"><div class="footer-group"><a href="." class="text-size-tiny text-color-silver text-weight-medium">Privacy Policy</a><a href="." class="text-size-tiny text-color-silver text-weight-medium">Terms of Service</a><div class="w-embed w-script"><p class="text-size-tiny text-color-silver">Nethub, Inc.© <script>new Date().getFullYear()>1111&&document.write(new Date().getFullYear());</script></p></div></div></div></div></div></div></footer><div class="w-embed"><style>
+
+@media (max-width: 1156px) {
+	.footer_content {
+  	text-align: center
+  }
+  
+  .max-width-xxsmall.is-footer {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  }
+}
+
+</style></div><div cb-element="modal-component" class="common_modal"><div class="modal_logic w-embed w-script"><script>
+  Webflow.push(function () {
+
+    // DOMready has fireddddddddddddddd
+    // May now use jQuery and Webflow api
+
+    let passwordValid = false;
+    const modalForm = document.querySelector('[cb-element="modal-form"]');
+    const modalComponent = document.querySelector('[cb-element="modal-component"]');
+
+    const modalPasswordField = document.querySelector('[cb-element="modal-password"]');
+    const lengthCheck = document.querySelector('[cb-element="length-check"]');
+    const numberCheck = document.querySelector('[cb-element="number-check"]');
+    const lowercaseCheck = document.querySelector('[cb-element="lowercase-check"]');
+    const uppercaseCheck = document.querySelector('[cb-element="uppercase-check"]');
+
+    const passwordValidIcon = document.querySelector('[cb-element="password-valid"]');
+    const passwordInvalidIcon = document.querySelector('[cb-element="password-invalid"]');
+    const passwordRequirementsText = document.querySelector('[cb-element="password-requirements-text"]');
+    const conditionsHeader = document.querySelector('[cb-element="conditions-header"]');
+    const passwordConditions = document.querySelector('[cb-element="password-conditions"]');
+    const passwordAlert = document.querySelector('[cb-element="modal-password-alert"]');
+
+
+    const tosAlert = document.querySelector('[cb-element="modal-tos-alert"]');
+    const alertComponent = document.querySelector('[cb-element="alert-component"]');
+    const alertText = alertComponent?.querySelector('[cb-element="alert-text"]');
+    const alertButton = alertComponent?.querySelector('[cb-element="alert-button"]');
+
+    const triggers = document.querySelectorAll('[cb-element="trigger-register-modal"]');
+    
+    //get referral code from url paramater
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const referral = urlParams.get('referral');
+
+    // Remove the register redirect if it was set on the previous page
+    // localStorage.removeItem("register-redirect");
+
+    const fetchIsUserLoggedIn = () => {
+      var cookies = decodeURIComponent(document.cookie).split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var c = cookies[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf("user-meta=") == 0) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    triggers?.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const redirectLoggedIn = trigger.getAttribute("redirect-logged-in");
+        const redirectLoggedOut = trigger.getAttribute("redirect-logged-out");
+
+        const registerRedirect = trigger.getAttribute("register-redirect");
+				// check discount id exist or not
+        const urlParams = new URLSearchParams(window.location.search);
+				const discountId = urlParams?.get('discountId');
+        
+        // Function to append discountId to a given URL
+        const appendDiscountId = (url) => {
+          if (!discountId || !url) return url;
+          const newUrl = new URL(url, window.location.origin);
+          newUrl.searchParams.set('discountId', discountId);
+          return newUrl.toString();
+        };
+    
+        // Check if attributes exist
+        if (redirectLoggedIn || redirectLoggedOut) {
+          const isUserLoggedIn = fetchIsUserLoggedIn();
+          console.log({ isUserLoggedIn });
+
+          if (isUserLoggedIn) {
+            window.location.href = appendDiscountId(redirectLoggedIn);
+          } else {
+            window.location.href = appendDiscountId(redirectLoggedOut);
+          }
+        } else {
+          modalComponent.style.display = "flex";
+          document.body.classList.add('overflow-hidden');
+
+        }
+      });
+    });
+
+    const validatePassword = (pass) => {
+      passwordValid = true;
+
+      if (pass.length > 8) {
+        lengthCheck.style.backgroundColor = "#bfc2d1";
+      } else {
+        passwordValid = false;
+        lengthCheck.style.backgroundColor = "#1d222a";
+      }
+
+      if (/\d/.test(pass)) {
+        numberCheck.style.backgroundColor = "#bfc2d1";
+      } else {
+        passwordValid = false;
+        numberCheck.style.backgroundColor = "#1d222a";
+      }
+      if (/[a-z]/.test(pass)) {
+        lowercaseCheck.style.backgroundColor = "#bfc2d1";
+      } else {
+        passwordValid = false;
+        lowercaseCheck.style.backgroundColor = "#1d222a";
+      }
+
+      if (/[A-Z]/.test(pass)) {
+        uppercaseCheck.style.backgroundColor = "#bfc2d1";
+      } else {
+        passwordValid = false;
+        uppercaseCheck.style.backgroundColor = "#1d222a";
+      }
+
+      if (passwordValid) {
+        passwordValidIcon.style.display = "block";
+        passwordInvalidIcon.style.display = "none";
+        passwordRequirementsText.innerHTML = "Strong Password!";
+        return true;
+      } else {
+        passwordRequirementsText.innerHTML = "See Password Requirements";
+        passwordValidIcon.style.display = "none";
+        passwordInvalidIcon.style.display = "block";
+        return false;
+      }
+    };
+
+    modalPasswordField.addEventListener("input", (e) => {
+      validatePassword(e.target.value);
+    });
+
+    modalPasswordField.addEventListener("focus", () => {
+      const style = window.getComputedStyle(passwordConditions);
+      const display = style.getPropertyValue("display");
+      if (display == "none") {
+        conditionsHeader.click();
+      }
+    });
+
+    modalPasswordField.addEventListener("blur", () => {
+      const style = window.getComputedStyle(passwordConditions);
+      const display = style.getPropertyValue("display");
+      if (passwordConditions.style.display == "block") {
+        conditionsHeader.click();
+      }
+    });
+
+    // Logic for the register form in the overlay
+    modalForm?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const formData = new FormData(modalForm);
+
+      const modalEmail = formData.get("modalEmail");
+      const password = formData.get("modalPassword");
+      const subscribe = Boolean(formData.get("subscribe"));
+      const tos = Boolean(formData.get("tos"));
+
+      //   CHeck if password is valid
+
+      let isPassValid = validatePassword(password);
+
+      if (!tos) {
+        tosAlert.style.display = "block";
+      } else {
+        tosAlert.style.display = "none";
+      }
+
+      if (!isPassValid) {
+        passwordAlert.style.display = "block";
+      } else {
+        passwordAlert.style.display = "none";
+      }
+
+      //   Only if password is valid run the API
+      //   Enable this password validation before launching the site
+      if (isPassValid && tos) {
+        var myHeaders = new Headers();
+        myHeaders.append("accept", "application/json, text/plain, */*");
+        myHeaders.append("content-type", "application/json");
+        
+        var details = {
+          email: modalEmail,
+          password: password,
+          password_verify: password,
+          subscribe: subscribe,
+          tos: tos,
+        }
+        //check if referral exist, add referral code to user details
+        if(referral){
+        	details['referral'] = referral
+        }
+        
+        // start hidden field enrichment
+        const enableHiddenFields = true; // Always enabled
+
+        if (enableHiddenFields) {
+          // Safely add hidden fields from the form
+          const hiddenFields = [
+            // Snowplow
+            'sp_domain_userid', 'sp_domain_sessionid', 'sp_visit_count', 'sp_cookie_hash',
+            // HubSpot
+            'tracking_hubspotutk', 'tracking_hstc',
+            // Google Analytics
+            'tracking_ga', 'tracking_gid', 'tracking_gcl_aw',
+            // Social/Click IDs
+            'gclid', 'fbclid', 'tracking_fbp',
+            // UTM parameters
+            'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+            // Page context
+            'page_url', 'page_title', 'referrer', 'tracking_timestamp',
+            // Form tracking
+            'submission_id',
+            // Attribution
+            'session_id', 'attribution_id', 'landing_page'
+          ];
+
+          // Safely add hidden fields that exist and have values
+          hiddenFields.forEach(fieldName => {
+            try {
+              const value = formData.get(fieldName);
+              // Only add if value exists and is not empty/null
+              if (value !== null && value !== undefined && value !== '') {
+                details[fieldName] = value;
+              }
+            } catch (error) {
+              // Silent fail - don't break form submission if enrichment fails
+            }
+          });
+
+        }
+        // end hidden field enrichment
+        
+        details.language = navigator.language || 'en';
+
+        var raw = JSON.stringify(details);
+				// console.log(raw)
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch("https://app.cybrary.it/auth/api/google/register", requestOptions)
+          .then(async (response) => {
+          if (response.status === 200) {
+            // const localRegisterRedirect = localStorage.getItem("register-redirect");
+
+            // if (localRegisterRedirect) {
+            //   const localRegisterRedirectUrl = localRegisterRedirect;
+            //   localStorage.removeItem("register-redirect");
+            //   window.location.href = `https://app.cybrary.it/verification-code?email=${modalEmail}&redirect_to=${localRegisterRedirectUrl}`;
+            // } else {
+            const redirectTo = urlParams.get('redirect_to')
+            let url = `https://app.cybrary.it/verification-code?email=${modalEmail}`;
+            if (redirectTo) {
+            	url = url + `&redirect_to=${redirectTo}`;
+            }
+            window.location.href = url;
+            // }
+          } else {
+            const res = await response.json();
+            if (alertComponent) {
+              if (res.errors.email) {
+                alertText.innerHTML = res.errors.email;
+              } else {
+                alertText.innerHTML = `Request failed with status ${response.status} <br> ${res.message}`;
+              }
+              alertButton.style.display = "none";
+              alertComponent.style.display = "flex";
+            }
+          }
+        })
+          .catch((error) => console.log("error", error));
+      }
+    });
+
+    const closeButton = document.querySelector("[cb-element='modal-close']")
+    const bgClose = document.querySelector('.modal_background')
+
+    bgClose.addEventListener('click', () => {
+      modalComponent.style.display = "none";
+      document.body.classList.remove('overflow-hidden');
+    });
+
+    closeButton.addEventListener('click', () => {
+      modalComponent.style.display = "none";
+      document.body.classList.remove('overflow-hidden');
+    });
+
+
+  });
+</script>
+
+
+
+<script>
+// script for marketing opt-in checkbox in signup form 
+//should be checked if the countryCode is not European Country
+document.addEventListener("DOMContentLoaded", function () {
+  const getCybGeo = async () => {
+    let cookieValue;
+    const DEFAULT_COOKIE_SETTINGS = {
+      domain: `.${window.location.host}`,
+      secure: true,
+      sameSite: "lax",
+    };
+
+    const GEO_COOKIE_PARAMS = {
+      ...DEFAULT_COOKIE_SETTINGS,
+      path: "/",
+      expires: 7,
+    };
+
+    const GEO_LOOKUP_URL =
+      "https://8dkfarln27.execute-api.us-east-2.amazonaws.com/Prod/geoip";
+    const GEO_COOKIE_NAME = "cyb_geo";
+
+    const getCookie = (name) => {
+      let match = document.cookie.match(
+        new RegExp("(^| )" + name + "=([^;]+)")
+      );
+      console.log("cookiee name", name);
+      if (match) {
+        return match[2];
+      } else {
+        return null;
+      }
+    };
+
+    const getCookieFromAws = async () => {
+      try {
+        const response = await fetch(GEO_LOOKUP_URL);
+        const data = await response.json();
+        console.log("data", typeof data.countryCode);
+        // Convert the data object to a string and encode it
+        let dataStr = encodeURIComponent(JSON.stringify(data));
+
+        
+        marketingOptIn(data);
+
+        // Replace the encoded JSON syntax characters back to their original form
+        dataStr = dataStr
+          .replace(/%7B/g, "{")
+          .replace(/%7D/g, "}")
+          .replace(/%3A/g, ":")
+          .replace(/%2F/g, "/");
+        // Create the cookie with the specified parameters
+        const expires = new Date();
+        expires.setDate(expires.getDate() + GEO_COOKIE_PARAMS.expires);
+
+        document.cookie = `${GEO_COOKIE_NAME}=${dataStr};expires=${expires.toUTCString()};path=${
+          GEO_COOKIE_PARAMS.path
+        };secure=${GEO_COOKIE_PARAMS.secure};samesite=${
+          GEO_COOKIE_PARAMS.sameSite
+        }`;
+        document.cookie = "test" + "=" + ("value" || "") + expires + "; path=/";
+        const geoInfo = { countryCode: data.countryCode, zip: data.zip };
+        return geoInfo;
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    cookieValue = getCookie(`${GEO_COOKIE_NAME}`);
+    //  console.log("cookie", cookieValue);
+    if (!cookieValue) {
+      getCookieFromAws();
+    } else {
+      marketingOptIn(null, getCookie(`${GEO_COOKIE_NAME}`));
+    }
+  };
+
+  const marketingOptIn = async (data, cookieValue) => {
+    const form = document.querySelector("#wf-form-Modal-Registration-Form");
+    const checkbox = form.querySelector("[name='subscribe']");
+    const europeanCountries = [
+      "AT",
+      "BE",
+      "BG",
+      "HR",
+      "CY",
+      "CZ",
+      "DK",
+      "EE",
+      "FI",
+      "FR",
+      "DE",
+      "GR",
+      "HU",
+      "IS",
+      "IE",
+      "IT",
+      "LV",
+      "LT",
+      "LU",
+      "MT",
+      "NL",
+      "NO",
+      "PL",
+      "PT",
+      "RO",
+      "SK",
+      "SI",
+      "ES",
+      "SE",
+      "CH",
+      "GB",
+    ];
+    if (!data) {
+      const decodedStr = decodeURIComponent(cookieValue);
+      const jsonObject = JSON.parse(decodedStr);
+
+      if (!europeanCountries.includes(jsonObject.countryCode)) {
+        checkbox.checked = true;
+        checkbox.parentNode.childNodes[0].classList.add(
+          "w--redirected-checked"
+        );
+      }
+    } else {
+      if (!europeanCountries.includes(data.countryCode)) {
+        checkbox.checked = true;
+        checkbox.parentNode.childNodes[0].classList.add(
+          "w--redirected-checked"
+        );
+      }
+    }
+  };
+
+  getCybGeo();
+});
+
+</script></div><div class="modal_scrollbar-styles w-embed"><style>
+/*width*/
+.modal_component::-webkit-scrollbar {
+width:15px;
+}
+/*track*/
+.modal_component::-webkit-scrollbar-track {
+background:rgb(29, 34, 42);
+border-width:1px;
+border-style:none;
+border-color:rgb(29, 34, 42);
+border-radius:0px;
+}
+/*thumb*/
+.modal_component::-webkit-scrollbar-thumb {
+background:rgba(255, 255, 255, 0.3);
+}
+</style></div><div class="padding-global-11"><div class="container-large"><div class="padding-section-120"><div class="modal_component"><div class="modal_content"><img loading="lazy" src="../assets/nethub/logo-nav.png" alt="Nethub" alt="" class="modal_logo"><div class="heading-style-h2">Register</div><div class="modal_join-text">Join over <span class="text-color-white-5">3 million</span> cybersecurity professionals advancing their career</div><div class="modal_sso-wrap"><a href="." class="text-color-silver-6">or sign up with</a><div class="modal_socials-wrap"><a href="../index.html#join" target="_blank" class="modal_social-link w-inline-block"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d70e0a5eaf95947566694_google_logo-vzji3b.svg" alt="" class="modal_social-logo"></a><a href="../index.html#join" target="_blank" class="modal_social-link no-border w-inline-block"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d70e01148e53cf9ad961c_apple_logo-1ta325v.svg" alt="" class="modal_social-logo"></a><a href="../index.html#join" target="_blank" class="modal_social-link w-inline-block"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d70e025fe5ea81d36fa79_microsoft_logo-1qpjigg.svg" alt="" class="modal_social-logo"></a><a href="../index.html#join" class="modal_social-link w-inline-block"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d70e035ea80b8854896ca_facebook_logo-1qsrlw.svg" alt="" class="modal_social-logo"></a><a href="../index.html#join" target="_blank" class="modal_social-link w-inline-block"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d70e0d8373cf9c1d5089c_linkedin_logo-1nqc3m8.svg" alt="" class="modal_social-logo"></a></div></div></div><div class="modal_form-block w-form"><form id="wf-form-Modal-Registration-Form" name="wf-form-Modal-Registration-Form" data-name="Modal Registration Form" method="post" cb-element="modal-form" class="modal_form" data-wf-page-id="6a6c145a0c9d6be476ec486f" data-wf-element-id="bc2d5682-3e29-e66e-9a6e-05b025f90eff"><div class="modal_form_field-wrap"><label for="modalEmail" class="modal_form_field-label">Email Address*</label><input class="modal_form_field-2 w-input" maxlength="256" name="modalEmail" data-name="modalEmail" cb-element="modal-email" placeholder="name@email.com" type="email" id="modalEmail" required=""></div><div class="modal_form_field-wrap"><label for="modalPassword" class="modal_form_field-label">Password*</label><input class="modal_form_field-2 w-input" maxlength="256" name="modalPassword" data-name="modalPassword" cb-element="modal-password" placeholder="••••••••" type="password" id="modalPassword" required=""><div cb-element="modal-password-alert" class="modal_form_password-alert-2"><em>Your password does not meet the minimum security qualifications, please try again.</em></div></div><div class="common_process_accordion_embed w-embed w-script"><!-- [Finsweet Attributes] A11Y -->
+<script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-a11y@1/a11y.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script></div><div class="modal_accordion_item"><div cb-element="conditions-header" tabindex="0" role="button" aria-controls="accordion-1-content-1" aria-expanded="false" class="modal_accordion_header"><img cb-element="password-invalid" loading="lazy" alt="" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d73253081f95e7114665d_Question.svg" class="modal_dd_icon-invalid"><img cb-element="password-valid" loading="lazy" alt="" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645bff6cfbbd3e0a6295dcdd_ShieldCheck.svg" class="modal_dd_icon-valid"><div cb-element="password-requirements-text">See Password Requirements</div><div class="modal_accordion_arrow-wrapper"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d7aac8db87a42878a0352_dropdown_arrow-9729ej.svg" alt="" class="modal_accordion_icon"></div></div><div cb-element="password-conditions" aria-labelledby="accordion-header-1" class="modal_accordion_content"><div class="modal_dd_list-wrap"><div class="modal_dd_requirement"><div cb-element="length-check" class="modal_dd_check-wrap"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d74f16881ba8c7f7221ce_Check.svg" alt="" class="modal_dd_check-icon"></div><div>At least 8 character(s)</div></div><div class="modal_dd_requirement"><div cb-element="number-check" class="modal_dd_check-wrap"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d74f16881ba8c7f7221ce_Check.svg" alt="" class="modal_dd_check-icon"></div><div>At least 1 number(s)</div></div><div class="modal_dd_requirement"><div cb-element="lowercase-check" class="modal_dd_check-wrap"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d74f16881ba8c7f7221ce_Check.svg" alt="" class="modal_dd_check-icon"></div><div>At least 1 lowercase letter(s)</div></div><div class="modal_dd_requirement"><div cb-element="uppercase-check" class="modal_dd_check-wrap"><img loading="lazy" src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/645d74f16881ba8c7f7221ce_Check.svg" alt="" class="modal_dd_check-icon"></div><div>At least 1 uppercase letter(s)</div></div></div></div></div><label class="w-checkbox modal_checkbox_field-3"><div class="w-checkbox-input w-checkbox-input--inputType-custom modal_checkbox"></div><input type="checkbox" name="subscribe" id="subscribe" data-name="subscribe" style="opacity:0;position:absolute;z-index:-1"><span class="modal_checkbox_label w-form-label" for="subscribe">I want to receive new courses, feature updates, news, and discounts from Nethub</span></label><label class="w-checkbox modal_checkbox_field-3"><div class="w-checkbox-input w-checkbox-input--inputType-custom modal_checkbox"></div><input type="checkbox" name="tos" id="tos" data-name="tos" required="" style="opacity:0;position:absolute;z-index:-1"><span class="modal_checkbox_label w-form-label" for="tos">By creating an account, you agree to the Terms of Service and Privacy Policy</span></label><div cb-element="modal-tos-alert" class="modal_form_password-alert-2">This is a required field.</div><input type="submit" data-wait="Please wait..." class="button-18 in-modal w-button" value="Create Free Account"><a href="../index.html#join" class="modal_link-login">Already have an account?</a><div class="modal_terms-text-2">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</div></form><div class="w-form-done"><div>Thank you! Your submission has been received!</div></div><div class="w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div><div cb-element="modal-close" class="modal_close-2 w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20V20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z" fill="currentColor"></path>
+</svg></div></div></div></div></div><div data-w-id="bc2d5682-3e29-e66e-9a6e-05b025f90f40" class="modal_background"></div></div><div cb-element="alert-component" class="common_alert"><div class="padding-global-11"><div class="container-large"><div class="padding-section-120"><div class="alert_component"><div class="alert_content"><div cb-element="alert-text" class="alert_text">This is some text inside of a div block.</div><a cb-element="alert-button" href="." class="button-18 in-alert w-button">Button Text</a></div><div data-w-id="bc2d5682-3e29-e66e-9a6e-05b025f90f4b" class="alert_close-2 w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20V20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z" fill="currentColor"></path>
+</svg></div></div></div></div></div><div data-w-id="bc2d5682-3e29-e66e-9a6e-05b025f90f4c" class="alert_background"></div></div><div class="global-styles w-embed"><style>
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+}
+.w-richtext > :not(div):first-child,
+.w-richtext > div:first-child > :first-child {
+  margin-top: 0 !important;
+}
+.w-richtext > :last-child,
+.w-richtext ol li:last-child,
+.w-richtext ul li:last-child {
+  margin-bottom: 0 !important;
+}
+  /*
+  note from Ilya: disabled this as it was stuffing up colours on tablet nav
+    */
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+/*.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link*/ {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+.pointer-events-off {
+  pointer-events: none;
+}
+.pointer-events-on {
+  pointer-events: auto;
+}
+.div-square::after {
+  content: '';
+  display: block;
+  padding-bottom: 100%;
+}
+main:focus-visible {
+  outline: -webkit-focus-ring-color auto 0px;
+}
+
+.container-medium,
+.container-small,
+.container-large {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+.w-input,
+.w-select,
+a {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+.text-style-6lines {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+.text-style-4lines {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+.text-style-3lines {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.text-style-2lines {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.truncate-width {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.display-inlineflex {
+  display: inline-flex;
+}
+.hide {
+  display: none !important;
+}
+@media screen and (max-width: 991px) {
+  .hide,
+  .hide-tablet {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 767px) {
+  .hide-mobile-landscape {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 479px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+.margin-0 {
+  margin: 0rem !important;
+}
+.padding-0 {
+  padding: 0rem !important;
+}
+.spacing-clean {
+  padding: 0rem !important;
+  margin: 0rem !important;
+}
+.margin-top {
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-top {
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-right {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-right {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-bottom {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-bottom {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-left {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+.padding-left {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+.margin-horizontal {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+.padding-horizontal {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+.margin-vertical {
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-vertical {
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+.card-component_pagination-dot.is-active,
+.button-gradient-wrapper,
+.button,
+.active-button,
+.is-alternate-gradient {
+  background: url(https://cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/646b9fe0b47d2eed57f9b316_gradient-flipped.webp);
+background-size: 150%	150%;
+background-position: center center;
+}
+.text-color-alternate-gradient {
+ 	 background: url(https://cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/646b9fe0b47d2eed57f9b316_gradient-flipped.webp);
+ -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  background-size: cover;
+}
+.text-style-highlight {
+  background: linear-gradient(94.16deg, #d90e72 3.35%, #ed616e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.is-pricing,
+.is-alternate,
+.is-link,
+.is-secondary {
+  background-color: transparent !important;
+  background: transparent;
+}
+
+.is-alternate:hover,
+.is-link:hover,
+.is-secondary:hover {
+  box-shadow: none;
+}
+
+.gradient-wrapper {
+  pointer-events: none;
+}
+.background-color-black-gradient {
+  background: linear-gradient(180deg, #13171c 0%, rgba(19, 23, 28, 0) 100%);
+}
+@media (min-width: 991px) {
+
+  .card-component_item .button {
+    height: 0rem;
+    max-height: 0rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    opacity: 0;
+    margin-top: 2rem;
+    transition: height 0.5s ease-in-out, max-height 0.5s ease-in-out,
+      padding 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  }
+  .card-component_item:hover .button {
+    height: auto;
+    max-height: 5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+    opacity: 1;
+  }
+  
+    .card-component_item:hover {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 767px) {
+  .card-component_item .button {
+  }
+}
+
+.text-color-orange-gradient {
+  background: linear-gradient(90deg, #f4964c 0.89%, #e77f7b 99.11%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.text-color-pink-gradient {
+  background: linear-gradient(90deg, #e31b73 0.89%, #e84175 99.11%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.text-color-purple-gradient {
+  background: linear-gradient(90deg, #b95d9c 0.89%, #d499f0 99.11%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.case-studies_item .button-gradient-wrapper {
+  opacity: 0;
+}
+
+.case-studies_item:hover .button-gradient-wrapper {
+  opacity: 1;
+}
+
+.footer_link-list .embed-wrapper {
+  transition: transform 0.5s ease-in;
+}
+
+.footer_link-list.open .embed-wrapper {
+  transform: rotate(180deg);
+}
+
+.card-component_pagination {
+  transform: none !important;
+}
+
+@media (min-width: 768px) {
+  .upskill_component .card-component_navigation-wrapper {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .case-studies_item-link .button {
+    display: none;
+  }
+}
+
+.section_blog-header {
+  background: linear-gradient(180deg, #13171c 0%, rgba(19, 23, 28, 0) 100%);
+}
+
+@media (min-width: 991px) {
+  .card-component_list > .card-component_item:nth-child(n + 5) {
+    display: none;
+  }
+  
+    .card-component_list > .card-component_item.no-crop:nth-child(n + 5) {
+    display: block;
+  }
+
+  .card-component_list > .card-component_item-no-hover:nth-child(n + 5) {
+    display: none;
+  }
+}
+
+.policy-content_link.w--current .active-button {
+  margin-left: 0rem;
+  opacity: 1;
+}
+
+[cl-function='truncate-two'] p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+[cl-function='truncate-three'] p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+[cl-function='truncate-four'] p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+
+[cl-style='1x1'] {
+  aspect-ratio: 1 / 1;
+}
+
+.faqs_accordion.is-active .faqs_answer {
+  max-height: 20rem !important;
+}
+
+.faqs_accordion.is-active .faqs_icon {
+	transform: rotate(180deg)
+}
+
+.faqs_accordion.is-active .active-button {
+  margin-left: 0rem;
+  opacity: 1;
+}
+
+.is-orange {
+  background: linear-gradient(90deg, #f4964c 0.89%, #e77f7b 99.11%);
+}
+.is-pink {
+  background: linear-gradient(90deg, #e31b73 0.89%, #e84175 99.11%);
+}
+.is-purple {
+  background: linear-gradient(90deg, #b95d9c 0.89%, #d499f0 99.11%);
+}
+.text-color-orange-gradient {
+  background: linear-gradient(90deg, #f4964c 0.89%, #e77f7b 99.11%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.text-color-pink-gradient {
+  background: linear-gradient(90deg, #e31b73 0.89%, #e84175 99.11%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.text-color-purple-gradient {
+  background: linear-gradient(90deg, #b95d9c 0.89%, #d499f0 99.11%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+@media (max-width: 767px) {
+  ._3-col-info_item .heading-style-h4 {
+    font-size: 1.5rem;
+  }
+}
+.card-component_navigation-wrapper
+  .card-component_pagination-dot:nth-child(n + 6) {
+  display: none;
+}
+.cloud-modernization_card-content:hover .icon-embed-xxsmall {
+  color: #d80c71;
+}
+.button.is-alternate:hover .is-alternate-gradient.button-bg {
+  opacity: 1;
+}
+.background-color-black-gradient-reversed {
+  background: linear-gradient(0deg, #13171c 0%, rgba(19, 23, 28, 0) 100%);
+}
+@media (max-width: 991px) {
+  .card-component_item-content .button {
+    margin-top: 2rem;
+  }
+}
+.policy-content_link:hover .simple-embed-wrapper {
+  opacity: 1;
+  transform: translate(0rem, 0rem);
+}
+.button.is-icon:hover svg {
+  transform: translate(0.25rem, 0rem);
+}
+.button.is-icon svg {
+transition:transform, 0.2s
+} 
+.card-component_link-wrapper {
+  pointer-events: none
+ }
+ 
+
+</style></div><div class="global-styles w-embed"><style>
+
+.is-senior-instructor,
+.label.is-instructor {
+	background: linear-gradient(90.31deg, #3E4687 0.34%, #D80C71 181.15%), linear-gradient(90.22deg, #A43C99 0.19%, #D80C71 60.24%, #F6944D 121.55%);
+}
+
+@media (max-width: 767px) {
+	.instructors_filters {
+  	overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
+
+@media (min-width: 991px) {
+  .instructors_checkbox-wrapper:hover .instructors_radio-button {
+    background-image: url("https://assets-global.website-files.com/63eef15e3ff8fd318e9a6888/6458c0fc89e2f2dd6391bfc4_Vector.svg");
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (min-width: 991px) {
+.blog-listings_link .button {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.blog-listings_link:hover .button {
+    opacity: 1;
+}
+
+.blog-listings_link .text-style-4lines,
+.blog-listings_link .heading-style-h5 {
+    transition: transform 0.4s ease-in-out;
+}
+
+.blog-listings_link:hover .text-style-4lines,
+.blog-listings_link:hover .heading-style-h5 {
+    transform: translate(0rem, -3rem);
+}
+}
+
+
+</style></div></footer></div><script src="../_external/d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.site_63eef15e3ff8fd318e9a6888.js" type="text/javascript"></script><script src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript"></script><script src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/js/webflow.schunk.b68d51ba4231a3a2.js" type="text/javascript"></script><script src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/js/webflow.schunk.d7f1298ecc64fce7.js" type="text/javascript"></script><script src="../_external/cdn.prod.website-files.com/63eef15e3ff8fd318e9a6888/js/webflow.6e1b5139.3aabb9889e14e24f.js" type="text/javascript"></script><script src="../_external/cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js" type="text/javascript"></script><!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<script>
+
+const bigHeadings = document.getElementsByTagName('h1');
+const headings = document.getElementsByTagName('h2');
+const regex = /{([^}]+)}/g;
+
+for (let i = 0; i < bigHeadings.length; i++) {
+  const heading = bigHeadings[i];
+  heading.innerHTML = heading.innerHTML.replace(regex, '<span class="text-color-alternate-gradient">$1</span>');
+}
+
+for (let i = 0; i < headings.length; i++) {
+  const heading = headings[i];
+  heading.innerHTML = heading.innerHTML.replace(regex, '<span class="text-color-alternate-gradient">$1</span>');
+}
+
+
+
+</script>
+
+<script> 
+// Custom Form Submit Button Script
+
+const theForm = document.querySelectorAll('[cl-form-submit="form"]');
+
+theForm.forEach((e) => {
+  const button = e.querySelector('[cl-form-submit="button"]');
+  const form = $(e).find("form");
+  button.addEventListener("click", function (event) {
+    event.preventDefault();
+    form.submit();
+  });
+});
+
+$('.footer_link-list').on('click', function() {
+  if ($(this).hasClass('open')) {
+    $(this).removeClass('open');
+  } else {
+    // close any open dropdowns before opening the clicked one
+    $('.footer_link-list.open').removeClass('open');
+    $(this).addClass('open');
+  }
+});
+
+/*
+$('.footer_link-list').on('mouseenter', function() {
+  $(this).addClass('open');
+});
+
+$('.footer_link-list').on('mouseleave', function() {
+  $(this).removeClass('open');
+});
+*/
+
+    </script>
+
+<!-- This Javascript was written on Slater.app :call_me_hand: <script defer>{var e,t=document.getElementsByTagName("div"),a=[];Array.prototype.slice.call(t,0).forEach(e=>{var t,s,i=(e.id?"#"+e.id:"")+(e.classList.length?"."+e.classList.value.replace(/ /g,"."):"");i.length>0&&-1===a.indexOf(i)&&a.push(i)});let s=373;172;fetch(`https://slater.app/page/${s}/receive_site_classes`,{method:"POST",body:JSON.stringify({domain:window.location,data:a}),headers:{"Access-Control-Allow-Origin":"*",Accept:"application/json","Content-Type":"application/json"}}).then(e=>e.text());function loadnav(e){let t=document.createElement("script");t.setAttribute("src",e),t.setAttribute("type","text/javascript"),document.body.appendChild(t),t.addEventListener("load",()=>{console.log("Slater loaded Nav (373.js) :call_me_hand:")}),t.addEventListener("error",e=>{console.log("Error loading file",e)})}let src=window.location.host.includes("webflow.io")?"https://slater.app/172/373.js":"https://slater-app.s3.amazonaws.com/slater/172/373.js";loadnav(src);}</script>-->
+
+
+<script>
+(function () {
+  const closeEvent = new Event('w-close');
+  const openEvent = new Event('w-open');
+  const downEvent = new Event('mousedown');
+  const upEvent = new Event('mouseup');
+  const isHover = e => e.parentElement.querySelector(':hover') === e;
+
+  document.querySelectorAll('[cl-close-nav]').forEach(el => {
+    el.addEventListener('click', function (event) {
+      const overlay = document.querySelector('.w-nav-overlay')
+      overlay.dispatchEvent(downEvent);
+      overlay.dispatchEvent(upEvent);
+      document.querySelectorAll('.w-nav').forEach(el => el.dispatchEvent(closeEvent));
+    });
+  })
+  document.querySelectorAll('[cl-close-trigger]').forEach(el => {
+    const id = el.getAttribute('cl-close-trigger')
+    el.addEventListener('click', function (event) {
+      document.querySelector(`[cl-close-target="${id}"]`).dispatchEvent(closeEvent);
+    });
+  })
+
+  const nav = document.querySelector('.w-nav')
+  const navFirstLayerDropdowns = document.querySelectorAll(".nav_dropdown-link_parent")
+
+  const prefix = "data"
+  const closeNavSelectors = [`[${prefix}="pricing-link"]`]
+  if (!nav) return;
+
+  let isDesktop = window.matchMedia("(min-width: 991px)").matches;
+
+  window.addEventListener("resize", (event) => {
+    isDesktop = window.matchMedia(
+      "(min-width: 991px)").matches;
+
+  });
+  let currTimeout;
+
+  // remove links from first layerdropdowns on mobi
+  if (!isDesktop) {
+    navFirstLayerDropdowns.forEach((eachElement, index) => {
+      eachElement.removeAttribute("href")
+
+    })
+  }
+  nav.addEventListener('mouseout', (e) => {
+
+    if (!isDesktop) return;
+    clearTimeout(currTimeout);
+    currTimeout = setTimeout(() => {
+      if (isHover(nav)) return;
+      nav.dispatchEvent(closeEvent)
+    }, 1000)
+
+  })
+  document.querySelectorAll('.w-nav .w-dropdown').forEach(parent => {
+    const el = parent.querySelector('.w-dropdown-toggle')
+    parent.addEventListener('mouseover', (e) => {
+      if (!isDesktop) return;
+      if (parent.querySelectorAll('.w--open').length > 0) return;
+      if (e.target.classList.contains('w--open')) return;
+      el.dispatchEvent(downEvent);
+      el.dispatchEvent(upEvent);
+    })
+  })
+
+  // For preventing links to close dropdown on mobile
+  document.querySelectorAll('.w-nav .w-dropdown').forEach(parent => {
+    const el = parent.querySelector('.w-dropdown-toggle')
+    parent.addEventListener('click', (e) => {
+      if (isDesktop) return;
+      e.stopPropagation()
+    })
+  })
+
+  for (const eachCloseNavSelector of closeNavSelectors) {
+    const eachCloseNavElement = document.querySelector(eachCloseNavSelector)
+    eachCloseNavElement.addEventListener("mouseover", (e) => {
+      if (!isDesktop) return;
+      if (currTimeout) {
+        clearTimeout(currTimeout);
+      }
+      nav.dispatchEvent(closeEvent)
+    })
+  }
+})()
+</script>
+
+   
+
+ 
+ <script>
+     document.querySelectorAll('input').forEach((el) => {
+el.name = el.name.replaceAll('-', ' ') 
+}) 
+    </script>
+
+<script src="../_external/cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+<script src="../_external/cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+<script>
+
+const navtl = gsap.timeline({
+  scrollTrigger: {
+    trigger: "body",
+    start: "top top",
+    end: "+=500",
+    scrub: true
+  }
+});
+
+navtl.fromTo(
+  ".nav_component",
+  {
+    backgroundColor: "hsla(0, 0%, 0%, 0)"
+  },
+  {
+    backgroundColor: "hsla(0, 0%, 0%, 1)"
+  }
+);
+
+
+</script>
+
+<script>
+  //share link button
+  let subject = "Recommendation for you on Nethub";
+  let body = `Hello,%0D%0A%0D%0A Recently, I have been building my cybersecurity and I.T. knowledge with the fastest growing catalog in the industry on Nethub.%0D%0A%0D%0A You can join for free too and I recommend you check out this course: ${location.href} %0D%0A%0D%0A Happy learning!` 
+  //%0D%0A is for line break
+
+  $('[cb-element="share-email"]').on('click',function(){
+    window.location.href = "mailto:"+ '' + "?cc=" + '' +"&subject=" + subject + "&body=" + body;
+  })
+  
+</script>
+
+<script>
+// BE Form Tracking
+// Version: 1.0.0-prod
+(function() {
+  'use strict';
+  
+  // Configuration - frozen in production
+  const CONFIG = Object.freeze({
+    enabled: true,
+    debug: false,
+    targetForms: Object.freeze(['Modal Registration Form']),
+    environment: 'production'
+  });
+  
+  // Check if already initialized (prevent re-running)
+  if (window.CYBRARY_TRACKING_INITIALIZED) {
+    return;
+  }
+  
+  // Use a private scope - nothing exposed to window
+  const TrackingModule = (function() {
+    
+    let enhancedForms = 0;
+    let submissionCount = 0;
+    
+    function log(message, data) {
+      // Only log errors in production
+      if (CONFIG.environment === 'production') {
+        if (message.includes('Error')) {
+          console.error(`[Tracking] ${message}`, data);
+        }
+        return;
+      }
+      
+      // Development logging
+      if (CONFIG.debug) {
+        console.log(`[Tracking] ${message}`, data || '');
+      }
+    }
+    
+    function getCookie(name) {
+      try {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+      } catch (e) {
+        // Silent fail in production
+      }
+      return null;
+    }
+    
+    function getSnowplowCookies() {
+      const cookies = document.cookie.split(';');
+      let sp_id = null;
+      let sp_ses = null;
+      let sp_hash = null;
+      
+      for (let cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name && name.startsWith('_sp_id.')) {
+          sp_id = value;
+          sp_hash = name.split('.')[1];
+        }
+        if (name && name.startsWith('_sp_ses.')) {
+          sp_ses = value;
+        }
+      }
+      
+      return { sp_id, sp_ses, sp_hash };
+    }
+    
+    function parseSnowplowCookie(cookieValue) {
+      if (!cookieValue) return {};
+      const parts = cookieValue.split('.');
+      return {
+        domain_userid: parts[0] || '',
+        visit_count: parseInt(parts[2]) || 0,
+        domain_sessionid: parts[5] || ''
+      };
+    }
+    
+    function getURLParams() {
+      const params = new URLSearchParams(window.location.search);
+      const utm = {};
+      
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'].forEach(param => {
+        utm[param] = params.get(param) || sessionStorage.getItem(param) || '';
+      });
+      
+      return utm;
+    }
+    
+    function storeUTMParams() {
+      const params = new URLSearchParams(window.location.search);
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'].forEach(param => {
+        const value = params.get(param);
+        if (value) {
+          try {
+            sessionStorage.setItem(param, value);
+          } catch (e) {
+            // Storage might be full or disabled
+          }
+        }
+      });
+    }
+    
+    function collectTrackingData() {
+      const snowplow = getSnowplowCookies();
+      const snowplowData = parseSnowplowCookie(snowplow.sp_id);
+      const utm = getURLParams();
+      
+      const data = {
+        sp_domain_userid: snowplowData.domain_userid || '',
+        sp_domain_sessionid: snowplowData.domain_sessionid || '',
+        sp_visit_count: String(snowplowData.visit_count || 0),
+        tracking_hubspotutk: getCookie('hubspotutk') || '',
+        tracking_hstc: getCookie('__hstc') || '',
+        tracking_ga: getCookie('_ga') || '',
+        tracking_gid: getCookie('_gid') || '',
+        tracking_gcl_aw: getCookie('_gcl_aw') || '',
+        tracking_fbp: getCookie('_fbp') || '',
+        utm_source: utm.utm_source || '',
+        utm_medium: utm.utm_medium || '',
+        utm_campaign: utm.utm_campaign || '',
+        utm_term: utm.utm_term || '',
+        utm_content: utm.utm_content || '',
+        gclid: utm.gclid || '',
+        fbclid: utm.fbclid || '',
+        page_url: window.location.href,
+        page_title: document.title,
+        referrer: document.referrer || '',
+        tracking_timestamp: new Date().toISOString()
+      };
+      
+      // Remove empty values
+      Object.keys(data).forEach(key => {
+        if (data[key] === '' || data[key] === '0') {
+          delete data[key];
+        }
+      });
+      
+      return data;
+    }
+    
+    function shouldEnhanceForm(form) {
+      const formName = form.getAttribute('data-name') || form.getAttribute('id') || '';
+      const isTargetForm = CONFIG.targetForms.some(target => 
+        formName.toLowerCase().includes(target.toLowerCase())
+      );
+      
+      if (!isTargetForm || form.dataset.cybrary_enhanced === 'true') {
+        return false;
+      }
+      
+      return true;
+    }
+    
+    function enhanceForm(form) {
+      try {
+        if (!shouldEnhanceForm(form)) {
+          return;
+        }
+        
+        const formName = form.getAttribute('data-name') || form.getAttribute('id') || 'unknown';
+        const trackingData = collectTrackingData();
+        
+        Object.keys(trackingData).forEach(key => {
+          const value = trackingData[key];
+          if (value) {
+            let input = form.querySelector(`input[name="${key}"]`);
+            
+            if (!input) {
+              input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = key;
+              input.className = 'cybrary-tracking-field';
+              form.appendChild(input);
+            }
+            
+            input.value = value;
+          }
+        });
+        
+        // Add submission ID
+        let submissionId = form.querySelector('input[name="submission_id"]');
+        if (!submissionId) {
+          submissionId = document.createElement('input');
+          submissionId.type = 'hidden';
+          submissionId.name = 'submission_id';
+          submissionId.className = 'cybrary-tracking-field';
+          form.appendChild(submissionId);
+        }
+        submissionId.value = `sub_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        
+        form.dataset.cybrary_enhanced = 'true';
+        enhancedForms++;
+        
+        log(`Form enhanced: ${formName}`);
+        
+      } catch (error) {
+        log('Error enhancing form:', error);
+      }
+    }
+    
+    function enhanceAllForms() {
+      const forms = document.querySelectorAll('form');
+      forms.forEach(form => {
+        enhanceForm(form);
+      });
+    }
+    
+    function handleFormSubmit(event) {
+      try {
+        const form = event.target;
+        if (form.tagName !== 'FORM' || form.dataset.cybrary_enhanced !== 'true') {
+          return;
+        }
+        
+        submissionCount++;
+        
+        // Update tracking fields with fresh data
+        const freshData = collectTrackingData();
+        Object.keys(freshData).forEach(key => {
+          const input = form.querySelector(`input[name="${key}"]`);
+          if (input) {
+            input.value = freshData[key];
+          }
+        });
+        
+        // Send to GTM if available (but with limited data)
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            event: 'form_tracked',
+            form_type: 'registration',
+            has_tracking: true
+            // Don't expose detailed tracking data
+          });
+        }
+        
+      } catch (error) {
+        // Silent fail - never block form submission
+      }
+    }
+    
+    function initialize() {
+      if (!CONFIG.enabled) {
+        return;
+      }
+      
+      try {
+        storeUTMParams();
+        enhanceAllForms();
+        
+        document.addEventListener('submit', handleFormSubmit, true);
+        
+        const observer = new MutationObserver(function(mutations) {
+          let shouldCheck = false;
+          mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length > 0) {
+              mutation.addedNodes.forEach(node => {
+                if (node.nodeType === 1 && (node.tagName === 'FORM' || node.querySelector?.('form'))) {
+                  shouldCheck = true;
+                }
+              });
+            }
+          });
+          
+          if (shouldCheck) {
+            setTimeout(enhanceAllForms, 100);
+          }
+        });
+        
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+        
+        // Report initialization success (minimal info)
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            event: 'tracking_initialized',
+            environment: CONFIG.environment
+          });
+        }
+        
+      } catch (error) {
+        log('Initialization error:', error);
+      }
+    }
+    
+    // Only expose minimal public API in development
+    if (CONFIG.environment !== 'production') {
+      return {
+        getStatus: function() {
+          return {
+            initialized: true,
+            enhanced: enhancedForms,
+            submissions: submissionCount
+          };
+        }
+      };
+    }
+    
+    // Return nothing in production (no public API)
+    return {
+      init: initialize
+    };
+  })();
+  
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      TrackingModule.init();
+    });
+  } else {
+    setTimeout(function() {
+      TrackingModule.init();
+    }, 0);
+  }
+  
+  // Mark as initialized
+  window.CYBRARY_TRACKING_INITIALIZED = true;
+  
+  // Development mode only - expose debugging
+  if (CONFIG.environment !== 'production') {
+    window.CYBRARY_TRACKING = TrackingModule;
+  }
+  // In production, nothing is exposed to window
+  
+})();
+</script>
+
+<script>
+// SSO Attribution Tracking
+// Version: 1.0.0
+// Captures attribution data and appends to SSO login URLs
+(function() {
+  'use strict';
+
+  // Set landing page once per session (first page visited)
+  if (!sessionStorage.getItem('landingPage')) {
+    sessionStorage.setItem('landingPage', window.location.pathname);
+  }
+
+  // Store UTM parameters in sessionStorage for attribution persistence
+  function storeUTMParams() {
+    const params = new URLSearchParams(window.location.search);
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'].forEach(param => {
+      const value = params.get(param);
+      if (value) {
+        try {
+          sessionStorage.setItem(param, value);
+        } catch (e) {
+          // Storage might be full or disabled
+        }
+      }
+    });
+  }
+
+  // Store UTM params on page load (captures attribution at landing)
+  storeUTMParams();
+
+  // Reuse helper functions from existing tracking module
+  function getCookie(name) {
+    try {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    } catch (e) {
+      // Silent fail
+    }
+    return null;
+  }
+
+  function getSnowplowData() {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      const [name, value] = cookie.trim().split('=');
+      if (name && name.startsWith('_sp_id.')) {
+        const parts = value.split('.');
+        return {
+          sp_domain_userid: parts[0] || null,
+          sp_domain_sessionid: parts[5] || null
+        };
+      }
+    }
+    return { sp_domain_userid: null, sp_domain_sessionid: null };
+  }
+
+  function removeNullValues(obj) {
+    const cleaned = {};
+    for (const key in obj) {
+      if (obj[key] !== null && obj[key] !== undefined && obj[key] !== '') {
+        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+          const nested = removeNullValues(obj[key]);
+          if (Object.keys(nested).length > 0) {
+            cleaned[key] = nested;
+          }
+        } else {
+          cleaned[key] = obj[key];
+        }
+      }
+    }
+    return cleaned;
+  }
+
+  function hasAnalyticsConsent() {
+    if (typeof _iub !== 'undefined' && _iub.cs && _iub.cs.api) {
+      const consent = _iub.cs.api.isConsentGiven();
+      if (consent === true) {
+        return true;
+      }
+      if (typeof consent === 'object' && consent !== null) {
+        return consent['3'] === true || consent.purposes?.['3'] === true;
+      }
+    }
+
+    const iubendaCookie = getCookie('_iub_cs-' + (window._iub && window._iub.csConfiguration && window._iub.csConfiguration.siteId));
+    if (iubendaCookie) {
+      try {
+        const decoded = decodeURIComponent(iubendaCookie);
+        if (decoded.includes('"purposes":') && decoded.includes('"3":true')) {
+          return true;
+        }
+      } catch (e) {
+        // Ignore parse errors
+      }
+    }
+
+    return false;
+  }
+
+  function captureAttribution() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasConsent = hasAnalyticsConsent();
+    const snowplow = hasConsent ? getSnowplowData() : { sp_domain_userid: null, sp_domain_sessionid: null };
+
+    const attribution = {
+      registration: {
+        referral_code: urlParams.get('referral'),
+        language: navigator.language || 'en-US',
+        source: 'web'
+      },
+      tracking: {
+        sp_domain_userid: hasConsent ? snowplow.sp_domain_userid : null,
+        sp_domain_sessionid: hasConsent ? snowplow.sp_domain_sessionid : null,
+        hs_utk: hasConsent ? getCookie('hubspotutk') : null,
+        hs_tracking_cookie: hasConsent ? getCookie('__hstc') : null,
+        ga_client_id: hasConsent ? getCookie('_ga') : null,
+        ga_session_id: hasConsent ? getCookie('_gid') : null,
+        gcl_aw: hasConsent ? getCookie('_gcl_aw') : null,
+        gclid: hasConsent ? (urlParams.get('gclid') || sessionStorage.getItem('gclid')) : null,
+        fbclid: hasConsent ? (urlParams.get('fbclid') || sessionStorage.getItem('fbclid')) : null,
+        fb_browser_id: hasConsent ? getCookie('_fbp') : null,
+        utm_source: urlParams.get('utm_source') || sessionStorage.getItem('utm_source'),
+        utm_medium: urlParams.get('utm_medium') || sessionStorage.getItem('utm_medium'),
+        utm_campaign: urlParams.get('utm_campaign') || sessionStorage.getItem('utm_campaign'),
+        utm_content: urlParams.get('utm_content') || sessionStorage.getItem('utm_content'),
+        utm_term: urlParams.get('utm_term') || sessionStorage.getItem('utm_term'),
+        page_url: window.location.pathname,
+        page_title: document.title,
+        referrer: document.referrer || null,
+        landing_page: sessionStorage.getItem('landingPage'),
+        tracking_timestamp: new Date().toISOString()
+      }
+    };
+
+    return removeNullValues(attribution);
+  }
+
+  // Initialize SSO button tracking
+  function initSSOTracking() {
+    // Find all SSO login links
+    const ssoLinks = document.querySelectorAll('a[href*="app.cybrary.it/login?provider="]');
+
+    if (ssoLinks.length === 0) {
+      return;
+    }
+
+    ssoLinks.forEach(link => {
+      // Prevent double-initialization
+      if (link.dataset.sso_enhanced === 'true') {
+        return;
+      }
+
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        try {
+          // Capture attribution
+          const attribution = captureAttribution();
+
+          // Encode for URL
+          const encodedAttribution = encodeURIComponent(JSON.stringify(attribution));
+
+          // Append to SSO URL
+          const originalHref = this.getAttribute('href');
+          const separator = originalHref.includes('?') ? '&' : '?';
+          const newHref = `${originalHref}${separator}attribution=${encodedAttribution}`;
+
+          // Redirect
+          window.location.href = newHref;
+
+        } catch (error) {
+          // If attribution fails, still redirect (don't block SSO)
+          console.error('[SSO Tracking] Error capturing attribution:', error);
+          window.location.href = this.getAttribute('href');
+        }
+      });
+
+      link.dataset.sso_enhanced = 'true';
+    });
+  }
+
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSSOTracking);
+  } else {
+    initSSOTracking();
+  }
+
+  // Watch for dynamically added SSO buttons (e.g., in modals)
+  const observer = new MutationObserver(function(mutations) {
+    let shouldCheck = false;
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes.length > 0) {
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType === 1) {
+            const hasSSO = node.href?.includes?.('app.cybrary.it/login?provider=') ||
+                          node.querySelector?.('a[href*="app.cybrary.it/login?provider="]');
+            if (hasSSO) {
+              shouldCheck = true;
+            }
+          }
+        });
+      }
+    });
+
+    if (shouldCheck) {
+      setTimeout(initSSOTracking, 100);
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
+</script><script src="../assets/nethub/nethub.js" data-depth="1"></script></body>
