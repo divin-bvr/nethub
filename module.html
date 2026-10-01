@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module | Nethub</title>
+  <link rel="icon" href="assets/nethub/logo-mark-inverse.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/nethub/nethub.css">
+</head>
+<body class="nethub-site">
+  <header class="nh-nav" id="nav">
+    <div class="nh-wrap">
+      <div class="nh-nav-top">
+        <a class="nh-brand" href="index.html"><img src="assets/nethub/logo-nav.png" alt="Nethub"></a>
+        <nav class="nh-nav-links"></nav>
+        <a class="nh-btn nh-btn-primary nh-nav-cta" href="register.html">Join a lab</a>
+        <button class="nh-menu-btn" type="button" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="nh-hero">
+    <div class="nh-wrap">
+      <p><a href="catalog.html">← Catalog</a></p>
+      <div class="nh-kicker" id="mod-tag">Module</div>
+      <h1 id="mod-title">Module</h1>
+      <div class="nh-course-photos nh-mod-hero"><img id="mod-img" alt=""></div>
+      <p class="nh-lead nh-lead-narrow" id="mod-body"></p>
+      <p class="intro" id="mod-access"></p>
+      <div class="nh-hero-actions" id="mod-actions"></div>
+    </div>
+  </section>
+
+  <footer class="nh-footer"><div class="nh-wrap nh-copy">© 2026 Nethub. <a href="platform.html">Platform</a></div></footer>
+  <script src="assets/nethub/modules.js"></script>
+  <script src="assets/nethub/nethub.js"></script>
+  <script src="assets/nethub/auth.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(location.search);
+      var id = params.get("id") || "";
+      var list = window.NETHUB_MODULES || [];
+      var mod = null;
+      for (var i = 0; i < list.length; i++) if (list[i].slug === id) mod = list[i];
+      if (!mod) {
+        location.href = "catalog.html";
+        return;
+      }
+      document.title = mod.title + " | Nethub";
+      document.getElementById("mod-tag").textContent = mod.tag;
+      document.getElementById("mod-title").textContent = mod.title;
+      document.getElementById("mod-body").textContent = mod.body;
+      var img = document.getElementById("mod-img");
+      img.src = mod.img;
+      img.alt = mod.title;
+      sessionStorage.setItem("nethub_module", mod.slug);
+
+      function paint(granted) {
+        var access = document.getElementById("mod-access");
+        var actions = document.getElementById("mod-actions");
+        if (granted) {
+          access.textContent = "The desk has granted this module on your seat. Open the lab or stay on exams.";
+          actions.innerHTML =
+            '<a class="nh-btn nh-btn-primary" href="dashboard.html">Open your desk</a>' +
+            '<a class="nh-btn nh-btn-ghost" href="sunday-lab.html">Sunday lab</a>';
+          return;
+        }
+        access.textContent = "Enrol is the subscription. After you pay, an admin grants this module. Until then the labs for this track stay locked.";
+        actions.innerHTML =
+          '<a class="nh-btn nh-btn-primary" id="mod-enrol" href="pricing.html?module=' + mod.slug + '">Enrol</a>' +
+          '<a class="nh-btn nh-btn-ghost" href="register.html?module=' + mod.slug + '">Create a seat first</a>';
+        var enrol = document.getElementById("mod-enrol");
+        if (enrol && window.nethubAuth && nethubAuth.token()) {
+          enrol.addEventListener("click", function () {
+            nethubAuth.api("/modules/enrol", { method: "POST", body: { slug: mod.slug } }).catch(function () {});
+          });
+        }
+      }
+
+      var user = null;
+      try { user = JSON.parse(localStorage.getItem("nethub_user") || "null"); } catch (e) {}
+      var localGrant = user && (user.role === "admin" || (user.modules || []).indexOf(mod.slug) !== -1);
+      paint(localGrant);
+
+      if (window.nethubAuth && nethubAuth.token()) {
+        nethubAuth.api("/me").then(function (data) {
+          var u = data.user || {};
+          var granted = u.role === "admin" || (u.modules || data.modules || []).indexOf(mod.slug) !== -1;
+          paint(granted);
+        }).catch(function () {});
+      }
+    })();
+  </script>
+</body>
+</html>

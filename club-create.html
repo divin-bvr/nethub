@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create a Nethub club | Nethub</title>
+  <link rel="icon" href="assets/nethub/logo-mark-inverse.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/nethub/nethub.css">
+</head>
+<body class="nethub-site">
+  <header class="nh-nav" id="nav">
+    <div class="nh-wrap">
+      <div class="nh-nav-top">
+        <a class="nh-brand" href="index.html"><img src="assets/nethub/logo-nav.png" alt="Nethub"></a>
+        <nav class="nh-nav-links"></nav>
+        <a class="nh-btn nh-btn-primary nh-nav-cta" href="register.html">Join a lab</a>
+        <button class="nh-menu-btn" type="button" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="nh-hero">
+    <div class="nh-wrap nh-auth-wrap">
+      <article class="nh-auth-card">
+        <div class="nh-kicker">Institutions</div>
+        <h1>Create a Nethub club</h1>
+        <p class="nh-lead">Name the club, pick the university (or Community), and name the leader for this term. The desk assesses new clubs before they appear in the learner dropdown.</p>
+        <form id="club-create-form">
+          <label>Club name<input name="name" required placeholder="Nethub [campus] club"></label>
+          <label>University or community
+            <div class="nh-combo" data-combo="university">
+              <input type="search" id="club-university-search" placeholder="Search all universities…" autocomplete="off">
+              <input type="hidden" name="university_id" id="club-university" required>
+              <ul class="nh-combo-list" id="club-university-list" hidden></ul>
+            </div>
+          </label>
+          <label>Term
+            <select name="term" required>
+              <option>2026 Term 1</option>
+              <option selected>2026 Term 2</option>
+              <option>2027 Term 1</option>
+            </select>
+          </label>
+          <label>Term leader name<input name="leader_name" required></label>
+          <label>Term leader email<input name="leader_email" type="email" required></label>
+          <p class="nh-form-error" role="alert"></p>
+          <button class="nh-btn nh-btn-primary" type="submit">Submit club</button>
+        </form>
+        <p class="nh-auth-switch"><a href="index.html#leaders">See term leaders</a></p>
+      </article>
+    </div>
+  </section>
+  <script src="assets/nethub/nethub.js"></script>
+  <script src="assets/nethub/clubs.js"></script>
+</body>
+</html>

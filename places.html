@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Places | Nethub</title>
+  <link rel="icon" href="assets/nethub/logo-mark-inverse.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/nethub/nethub.css">
+</head>
+<body class="nethub-site">
+  <header class="nh-nav" id="nav">
+    <div class="nh-wrap">
+      <div class="nh-nav-top">
+        <a class="nh-brand" href="index.html"><img src="assets/nethub/logo-nav.png" alt="Nethub"></a>
+        <nav class="nh-nav-links"></nav>
+        <a class="nh-btn nh-btn-primary nh-nav-cta" href="register.html">Join a lab</a>
+        <button class="nh-menu-btn" type="button" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">Menu</button>
+      </div>
+    </div>
+  </header>
+  <section class="nh-hero">
+    <div class="nh-wrap">
+      <h1 data-cms-page="places" data-cms-field="title">Places</h1>
+      <p class="nh-lead" data-cms-page="places" data-cms-field="lead">Pick a room. Each card is its own page.</p>
+    </div>
+  </section>
+  <section class="nh-section">
+    <div class="nh-wrap nh-grid-3" id="nh-places">
+      <a class="nh-tile" href="uganda.html"><span class="nh-photo-dark"><img data-cms-photo="places-uganda" src="assets/nethub/photos/uganda-cohort.jpg" alt="Uganda campus lab"></span><h3>Uganda</h3><p>Bugema and Makerere.</p></a>
+      <a class="nh-tile" href="drc.html"><span class="nh-photo-dark"><img data-cms-photo="places-drc" src="assets/nethub/photos/assurance-mbula-presenting.jpg" alt="Assurance Mbula presenting in Kinshasa"></span><h3>Kinshasa DRC</h3></a>
+      <a class="nh-tile" href="community.html"><span class="nh-photo-dark"><img data-cms-photo="places-community" src="assets/nethub/photos/lab-students.jpg" alt="Community lab staff"></span><h3>Community</h3><p>Refugees and host community.</p></a>
+    </div>
+  </section>
+  <footer class="nh-footer"><div class="nh-wrap nh-copy">© 2026 Nethub. <a href="platform.html">Platform</a></div></footer>
+  <script src="assets/nethub/nethub.js"></script>
+</body>
+</html>

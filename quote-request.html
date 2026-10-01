@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request a quote | Nethub</title>
+  <link rel="icon" href="assets/nethub/logo-mark-inverse.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/nethub/nethub.css">
+</head>
+<body class="nethub-site">
+  <header class="nh-nav" id="nav">
+    <div class="nh-wrap"><div class="nh-nav-top">
+      <a class="nh-brand" href="index.html"><img src="assets/nethub/logo-nav.png" alt="Nethub"></a>
+      <nav class="nh-nav-links"></nav>
+      <a class="nh-btn nh-btn-primary nh-nav-cta" href="register.html">Join a lab</a>
+      <button class="nh-menu-btn" type="button" onclick="document.getElementById('nav').classList.toggle('open')">Menu</button>
+    </div></div>
+  </header>
+  <section class="nh-hero">
+    <div class="nh-wrap nh-auth-wrap">
+      <article class="nh-auth-card">
+        <div class="nh-kicker">Companies</div>
+        <h1>Request a quote</h1>
+        <p class="nh-lead">Pentest, awareness, hardening, forensics. This form writes to the Nethub SQLite desk.</p>
+        <form data-form="quote">
+          <label>Name<input name="name" required></label>
+          <label>Email<input name="email" type="email" required></label>
+          <label>Company<input name="company"></label>
+          <label>Scope<input name="scope" placeholder="Web app, campus wifi, cloud IAM…"></label>
+          <label>Details<textarea name="message" required minlength="8" rows="5"></textarea></label>
+          <p class="nh-form-error" role="alert"></p>
+          <p class="nh-form-ok" role="status"></p>
+          <button class="nh-btn nh-btn-primary" type="submit">Save quote request</button>
+        </form>
+      </article>
+    </div>
+  </section>
+  <footer class="nh-footer"><div class="nh-wrap nh-copy">© 2026 Nethub. <a href="platform.html">Platform</a></div></footer>
+  <script src="assets/nethub/nethub.js"></script>
+  <script src="assets/nethub/forms.js"></script>
+</body>
+</html>

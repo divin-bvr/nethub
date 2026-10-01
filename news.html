@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cyber news | Nethub</title>
+  <link rel="icon" href="assets/nethub/logo-mark-inverse.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/nethub/nethub.css">
+</head>
+<body class="nethub-site">
+  <header class="nh-nav" id="nav">
+    <div class="nh-wrap"><div class="nh-nav-top">
+      <a class="nh-brand" href="index.html"><img src="assets/nethub/logo-nav.png" alt="Nethub"></a>
+      <nav class="nh-nav-links"></nav>
+      <a class="nh-btn nh-btn-primary nh-nav-cta" href="register.html">Join a lab</a>
+      <button class="nh-menu-btn" type="button" onclick="document.getElementById('nav').classList.toggle('open')">Menu</button>
+    </div></div>
+  </header>
+  <section class="nh-hero"><div class="nh-wrap">
+    <h1>News</h1>
+    <p class="nh-lead">Daily cybersecurity headlines from Krebs, The Hacker News, BleepingComputer, CISA, Dark Reading, SANS ISC, Microsoft Security, Unit 42, Cisco Talos, and CrowdStrike — the same organizations that post on LinkedIn. LinkedIn itself is not scraped. Open each story on the publisher.</p>
+  </div></section>
+  <section class="nh-section"><div class="nh-wrap">
+    <div id="news-list" class="nh-news-list"></div>
+  </div></section>
+  <footer class="nh-footer"><div class="nh-wrap nh-copy">© 2026 Nethub. <a href="platform.html">Platform</a></div></footer>
+  <script src="assets/nethub/nethub.js"></script>
+  <script src="assets/nethub/news.js"></script>
+</body>
+</html>

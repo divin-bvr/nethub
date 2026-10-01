@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desk | Nethub</title>
+  <link rel="icon" href="assets/nethub/logo-mark-inverse.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/nethub/nethub.css">
+</head>
+<body class="nethub-site">
+  <header class="nh-nav" id="nav">
+    <div class="nh-wrap">
+      <div class="nh-nav-top">
+        <a class="nh-brand" href="index.html"><img src="assets/nethub/logo-nav.png" alt="Nethub"></a>
+        <nav class="nh-nav-links">
+          <a href="index.html">Site</a>
+          <a href="instructor.html">Instructors</a>
+        </nav>
+        <a class="nh-btn nh-btn-ghost nh-nav-cta" href="platform.html">Sign out desk</a>
+      </div>
+    </div>
+  </header>
+  <section class="nh-section">
+    <div class="nh-wrap">
+      <h2>Desk</h2>
+      <p class="intro">Monitor and control the site from here: titles, photos, cards, gallery, sessions, seats, and staff. The owner desk cannot be deleted by anyone else.</p>
+      <p class="nh-form-error" id="admin-err" role="alert"></p>
+      <div class="nh-admin-tabs">
+        <button type="button" class="nh-btn nh-btn-primary is-on" data-tab="instructors">Instructors</button>
+        <button type="button" class="nh-btn nh-btn-ghost" data-tab="photos">Photos</button>
+        <button type="button" class="nh-btn nh-btn-ghost" data-tab="cards">Cards</button>
+        <button type="button" class="nh-btn nh-btn-ghost" data-tab="colors">Colors</button>
+        <button type="button" class="nh-btn nh-btn-ghost" data-tab="users">Seats</button>
+        <button type="button" class="nh-btn nh-btn-ghost" data-tab="inbox">Inbox</button>
+        <button type="button" class="nh-btn nh-btn-ghost" data-tab="pages">Pages</button>
+        <button type="button" class="nh-btn nh-btn-ghost" data-tab="gallery">Gallery</button>
+        <button type="button" class="nh-btn nh-btn-ghost" data-tab="sessions">Sessions</button>
+        <button type="button" class="nh-btn nh-btn-ghost" data-tab="talk">Talk</button>
+        <button type="button" class="nh-btn nh-btn-ghost" data-tab="staff">Staff</button>
+      </div>
+
+      <div data-panel="instructors">
+        <h3>Instructors</h3>
+        <p class="intro">Add, edit, or delete. Photo uploads replace the instructor page.</p>
+        <form id="ins-form" class="nh-admin-form">
+          <input type="hidden" id="ins-id">
+          <label>Name<input id="ins-name" required></label>
+          <label>Title<input id="ins-title" placeholder="Facilitator"></label>
+          <label>Bio<textarea id="ins-bio" rows="3"></textarea></label>
+          <label>Photo URL<input id="ins-photo" placeholder="or upload below"></label>
+          <label>Photo file<input id="ins-file" type="file" accept="image/*"></label>
+          <label>Order<input id="ins-order" type="number" value="0"></label>
+          <label>Gradient color<input id="ins-ov-color" type="color" value="#050a12"></label>
+          <label>Gradient strength<input id="ins-ov-opacity" type="range" min="0" max="100" value="50"></label>
+          <label>Image opacity<input id="ins-img-opacity" type="range" min="10" max="100" value="100"></label>
+          <label>Height px (0 = default)<input id="ins-h" type="number" min="0" max="800" value="0"></label>
+          <label>Brightness<input id="ins-br" type="range" min="20" max="200" value="100"></label>
+          <label class="nh-check"><input id="ins-bw" type="checkbox"> Black and white</label>
+          <div class="nh-admin-actions">
+            <button class="nh-btn nh-btn-primary" type="submit">Save instructor</button>
+            <button class="nh-btn nh-btn-ghost" type="button" id="ins-clear">New</button>
+          </div>
+        </form>
+        <div id="admin-instructors" class="nh-grid-3"></div>
+      </div>
+
+      <div data-panel="photos" hidden>
+        <h3>Site photos</h3>
+        <p class="intro">Every slot maps to a place on the site (hero cards, Uganda, Places, logos). Replace the file to update the live page.</p>
+        <form id="photo-new" class="nh-admin-form">
+          <label>New slot name<input id="photo-slot" placeholder="fan-1"></label>
+          <label>Alt text<input id="photo-alt"></label>
+          <label>File<input id="photo-file" type="file" accept="image/*"></label>
+          <button class="nh-btn nh-btn-primary" type="submit">Add photo slot</button>
+        </form>
+        <form id="photo-grade" class="nh-admin-form">
+          <input type="hidden" id="pg-id">
+          <p class="intro" id="pg-slot-label">Pick a slot, then set gradient, opacity, size, and black-and-white.</p>
+          <label>Gradient color<input id="pg-ov-color" type="color" value="#050a12"></label>
+          <label>Gradient strength<input id="pg-ov-opacity" type="range" min="0" max="100" value="50"></label>
+          <label>Image opacity<input id="pg-img-opacity" type="range" min="10" max="100" value="100"></label>
+          <label>Height px (0 = default)<input id="pg-h" type="number" min="0" max="800" value="0"></label>
+          <label>Brightness<input id="pg-br" type="range" min="20" max="200" value="100"></label>
+          <label class="nh-check"><input id="pg-bw" type="checkbox"> Black and white</label>
+          <button class="nh-btn nh-btn-primary" type="submit">Save photo grade</button>
+        </form>
+        <div id="admin-photos" class="nh-grid-3"></div>
+      </div>
+
+      <div data-panel="cards" hidden>
+        <h3>Cards</h3>
+        <p class="intro">Edit title, copy, link, image, and card color. Community and How we train cards on the homepage listen here.</p>
+        <form id="card-form" class="nh-admin-form">
+          <input type="hidden" id="card-id">
+          <label>Section
+            <select id="card-section">
+              <option value="community">community</option>
+              <option value="train">train</option>
+              <option value="places">places</option>
+              <option value="gallery">gallery</option>
+            </select>
+          </label>
+          <label>Title<input id="card-title" required></label>
+          <label>Body<textarea id="card-body" rows="3"></textarea></label>
+          <label>Link<input id="card-href"></label>
+          <label>Button text<input id="card-cta"></label>
+          <label>Image URL<input id="card-image"></label>
+          <label>Image file<input id="card-file" type="file" accept="image/*"></label>
+          <label>Card color<input id="card-color" type="color" value="#1b4f8a"></label>
+          <label>Order<input id="card-order" type="number" value="0"></label>
+          <label>Gradient color<input id="card-ov-color" type="color" value="#050a12"></label>
+          <label>Gradient strength<input id="card-ov-opacity" type="range" min="0" max="100" value="50"></label>
+          <label>Image opacity<input id="card-img-opacity" type="range" min="10" max="100" value="100"></label>
+          <label>Height px (0 = default)<input id="card-h" type="number" min="0" max="800" value="0"></label>
+          <label>Brightness<input id="card-br" type="range" min="20" max="200" value="100"></label>
+          <label class="nh-check"><input id="card-bw" type="checkbox"> Black and white</label>
+          <div class="nh-admin-actions">
+            <button class="nh-btn nh-btn-primary" type="submit">Save card</button>
+            <button class="nh-btn nh-btn-ghost" type="button" id="card-clear">New</button>
+          </div>
+        </form>
+        <div id="admin-cards" class="nh-grid-3"></div>
+      </div>
+
+      <div data-panel="colors" hidden>
+        <h3>Colors</h3>
+        <form id="color-form" class="nh-admin-form">
+          <label>Card color 1<input id="color-1" type="color"></label>
+          <label>Card color 2<input id="color-2" type="color"></label>
+          <label>Card color 3<input id="color-3" type="color"></label>
+          <label>Accent<input id="color-accent" type="color"></label>
+          <label>Homepage tagline<input id="site-tagline"></label>
+          <button class="nh-btn nh-btn-primary" type="submit">Save colors</button>
+        </form>
+      </div>
+
+      <div data-panel="users" hidden>
+        <h3>Seats</h3>
+        <div id="admin-list" class="nh-grid-3"></div>
+      </div>
+
+      <div data-panel="inbox" hidden>
+        <h3>Forms in SQLite</h3>
+        <div id="admin-inbox"></div>
+      </div>
+
+      <div data-panel="pages" hidden>
+        <h3>Page titles</h3>
+        <p class="intro">Change titles and leads on Places, Uganda, DRC, Community, Sunday, Gallery, and homepage sections.</p>
+        <form id="page-form" class="nh-admin-form">
+          <label>Page
+            <select id="page-key"></select>
+          </label>
+          <label>Kicker<input id="page-kicker"></label>
+          <label>Title<input id="page-title" required></label>
+          <label>Lead<textarea id="page-lead" rows="3"></textarea></label>
+          <button class="nh-btn nh-btn-primary" type="submit">Save page</button>
+        </form>
+        <div id="admin-pages" class="nh-grid-3"></div>
+      </div>
+
+      <div data-panel="gallery" hidden>
+        <h3>Gallery</h3>
+        <p class="intro">Add, edit, or delete photos and captions. Same 50/50 grade as the other cards.</p>
+        <form id="gal-form" class="nh-admin-form">
+          <input type="hidden" id="gal-id">
+          <label>Title<input id="gal-title" required></label>
+          <label>Caption<textarea id="gal-caption" rows="2"></textarea></label>
+          <label>Photo URL<input id="gal-photo"></label>
+          <label>Photo file<input id="gal-file" type="file" accept="image/*"></label>
+          <label>Order<input id="gal-order" type="number" value="0"></label>
+          <label>Gradient color<input id="gal-ov-color" type="color" value="#050a12"></label>
+          <label>Gradient strength<input id="gal-ov-opacity" type="range" min="0" max="100" value="50"></label>
+          <label>Image opacity<input id="gal-img-opacity" type="range" min="10" max="100" value="100"></label>
+          <label>Height px (0 = default)<input id="gal-h" type="number" min="0" max="800" value="0"></label>
+          <label>Brightness<input id="gal-br" type="range" min="20" max="200" value="100"></label>
+          <label class="nh-check"><input id="gal-bw" type="checkbox"> Black and white</label>
+          <div class="nh-admin-actions">
+            <button class="nh-btn nh-btn-primary" type="submit">Save photo</button>
+            <button class="nh-btn nh-btn-ghost" type="button" id="gal-clear">New</button>
+          </div>
+        </form>
+        <div id="admin-gallery" class="nh-grid-3"></div>
+      </div>
+
+      <div data-panel="sessions" hidden>
+        <h3>Online sessions</h3>
+        <p class="intro">Create a live room. It shows on Gallery, Sunday lab, and student desks.</p>
+        <form id="sess-form" class="nh-admin-form">
+          <input type="hidden" id="sess-id">
+          <label>Title<input id="sess-title" required></label>
+          <label>When<input id="sess-when" placeholder="Sunday 16:00 EAT"></label>
+          <label>Join URL<input id="sess-url" placeholder="https://..."></label>
+          <label>Notes<textarea id="sess-notes" rows="2"></textarea></label>
+          <div class="nh-admin-actions">
+            <button class="nh-btn nh-btn-primary" type="submit">Save session</button>
+            <button class="nh-btn nh-btn-ghost" type="button" id="sess-clear">New</button>
+          </div>
+        </form>
+        <div id="admin-sessions" class="nh-grid-3"></div>
+      </div>
+
+      <div data-panel="talk" hidden>
+        <h3>Communicate</h3>
+        <p class="intro">Post a desk note. Students see it on their lab desk.</p>
+        <form id="msg-form" class="nh-admin-form">
+          <label>Note<textarea id="msg-body" rows="3" required></textarea></label>
+          <button class="nh-btn nh-btn-primary" type="submit">Send to seats</button>
+        </form>
+        <div id="admin-messages"></div>
+      </div>
+
+      <div data-panel="staff" hidden>
+        <h3>Staff desks</h3>
+        <p class="intro">Only the owner can create another admin. Staff cannot delete the owner.</p>
+        <form id="staff-form" class="nh-admin-form">
+          <label>Name<input id="staff-name" required></label>
+          <label>Email<input id="staff-email" type="email" required></label>
+          <label>Username<input id="staff-username" required></label>
+          <label>Password<input id="staff-pass" type="password" minlength="8" required></label>
+          <button class="nh-btn nh-btn-primary" type="submit">Create staff admin</button>
+        </form>
+        <p class="nh-form-error" id="staff-note"></p>
+        <div id="admin-staff" class="nh-grid-3"></div>
+      </div>
+    </div>
+  </section>
+  <script src="assets/nethub/nethub.js"></script>
+  <script src="assets/nethub/auth.js"></script>
+  <script src="assets/nethub/cms-admin.js"></script>
+</body>
+</html>
