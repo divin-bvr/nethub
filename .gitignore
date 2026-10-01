@@ -1,0 +1,10 @@
+server/nethub.db
+server/__pycache__/
+__pycache__/
+*.pyc
+.env
+.env.*
+uploads/*
+!uploads/.gitkeep
+.DS_Store
+Thumbs.db

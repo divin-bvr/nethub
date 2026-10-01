@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Practice exams | Nethub</title>
+  <link rel="icon" href="assets/nethub/logo-mark-inverse.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/nethub/nethub.css">
+</head>
+<body class="nethub-site">
+  <header class="nh-nav" id="nav">
+    <div class="nh-wrap"><div class="nh-nav-top">
+      <a class="nh-brand" href="index.html"><img src="assets/nethub/logo-nav.png" alt="Nethub"></a>
+      <nav class="nh-nav-links"></nav>
+      <a class="nh-btn nh-btn-primary nh-nav-cta" href="register.html">Join a lab</a>
+      <button class="nh-menu-btn" type="button" onclick="document.getElementById('nav').classList.toggle('open')">Menu</button>
+    </div></div>
+  </header>
+  <section class="nh-hero"><div class="nh-wrap">
+    <h1>Practice exams</h1>
+    <p class="nh-lead">Pick a category. Each attempt is 20 questions, shuffled. About 30% of the set changes the next time you sit it. Most items are multiple choice; some are matching or a short fill. The clock is 15, 20, or 25 minutes depending on how hard the room is.</p>
+  </div></section>
+  <section class="nh-section" id="exam-home"><div class="nh-wrap">
+    <div class="nh-grid-3" id="exam-cats"></div>
+    <p class="nh-form-error" id="exam-home-err" role="status"></p>
+  </div></section>
+  <section class="nh-section" id="exam-run" hidden>
+    <div class="nh-wrap">
+      <div class="nh-exam-bar">
+        <button class="nh-btn nh-btn-ghost" type="button" id="exam-back">Categories</button>
+        <div>
+          <div class="nh-tag" id="exam-diff"></div>
+          <h2 id="exam-cat-title">Exam</h2>
+        </div>
+        <div class="nh-exam-timer" id="exam-timer" aria-live="polite">25:00</div>
+      </div>
+      <form class="nh-exam" id="exam-form"></form>
+      <p class="nh-form-error" id="exam-score" role="status"></p>
+      <div class="nh-hero-actions">
+        <button class="nh-btn nh-btn-primary" type="button" id="exam-submit">Submit answers</button>
+        <button class="nh-btn nh-btn-ghost" type="button" id="exam-retry" hidden>New attempt</button>
+      </div>
+    </div>
+  </section>
+  <footer class="nh-footer"><div class="nh-wrap nh-copy">© 2026 Nethub. <a href="platform.html">Platform</a></div></footer>
+  <script src="assets/nethub/nethub.js"></script>
+  <script src="assets/nethub/exam.js"></script>
+</body>
+</html>
